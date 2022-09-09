@@ -27,4 +27,25 @@ double Sphere::distance(Sphere& s) const {
   std::cout << "R\n";
   return rawDist - (s.diameter + diameter) / 2;
 }
+
+static bool almostEquals(double a, double b) {
+  const double epsilon = 0.00001;
+  return std::abs(a - b) < epsilon;
+}
+
+bool Sphere::operator==(Sphere& rhs) {
+  return almostEquals(diameter, rhs.diameter);
+}
+bool Sphere::operator<=(Sphere& rhs) {
+  return diameter <= rhs.diameter;
+}
+bool Sphere::operator>=(Sphere& rhs) {
+  return diameter >= rhs.diameter;
+}
+bool Sphere::operator>(Sphere& rhs) {
+  return diameter > rhs.diameter;
+}
+bool Sphere::operator<(Sphere& rhs) {
+  return diameter < rhs.diameter;
+}
 }  // namespace libPlanet

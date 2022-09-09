@@ -40,6 +40,15 @@ class Sphere : public Point {
   double distance(Sphere&) const;
 
   ~Sphere();
+
+  /**
+   * @brief compares the Spheres based on their diameter
+   */
+  bool operator==(Sphere&);
+  bool operator<=(Sphere&);
+  bool operator>=(Sphere&);
+  bool operator>(Sphere&);
+  bool operator<(Sphere&);
 };
 
 }  // namespace libPlanet

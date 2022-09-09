@@ -29,5 +29,6 @@ void testSpheres() {
   libPlanet::Sphere s1("Centre", 0, 0, 0, 2);
   libPlanet::Sphere s2("Close to centre", 2, 0, 0, 2);
 
+  std::cout << "Test equality " << (s1 == s2) << std::endl;
   std::cout << "distance : " << s1.distance(s2) << std::endl;
 }
