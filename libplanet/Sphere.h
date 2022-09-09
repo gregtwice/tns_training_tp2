@@ -1,0 +1,45 @@
+#pragma once
+
+#include <string>
+
+#include "Point.h"
+
+namespace libPlanet {
+
+class Sphere : public Point {
+ private:
+  double diameter;
+
+ public:
+  Sphere(std::string nom, double x, double y, double z, double diameter);
+
+  /**
+   * @brief Computes the volume of the sphere
+   *
+   * @return the computed volume
+   */
+  double volume();
+
+  /**
+   * @brief Computes the distance between the Sphere and a point
+   *
+   * @param Point the point to get the distance from
+   * @return the computed distance
+   */
+  double distance(Point&) const override;
+
+  /**
+   * @brief Computes the distance between a Sphere and a Sphere
+   *
+   * @warning If the spheres overlap, the distance will be positive
+   *
+   * @param Sphere the sphere to get the distance from
+   *
+   * @return the computed distance
+   */
+  double distance(Sphere&) const;
+
+  ~Sphere();
+};
+
+}  // namespace libPlanet

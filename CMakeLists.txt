@@ -7,3 +7,6 @@ add_subdirectory(libplanet)
 target_link_libraries(planets PRIVATE libplanet)
 
 target_include_directories(planets PRIVATE ${PROJECT_SOURCE_DIR}/libplanet)
+
+# for vs code
+add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)

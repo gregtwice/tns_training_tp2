@@ -1,14 +1,11 @@
 #include "Point.h"
 
 #include <cmath>
-
+namespace libPlanet {
 Point::Point(std::string nom, double x, double y, double z)
     : nom(nom), x(x), y(y), z(z) {}
 
-/// @brief Computes the euclidian distance between two points
-/// @param rhs the Point to get the distance from
-/// @return the computed distance
-double Point::distance(Point& rhs) {
+double Point::distance(Point& rhs) const {
   double dx = this->x - rhs.x;
   double dy = this->y - rhs.y;
   double dz = this->z - rhs.z;
@@ -30,3 +27,4 @@ std::ostream& operator<<(std::ostream& os, const Point p) {
      << ", z: " << p.z << " }";
   return os;
 }
+}  // namespace libPlanet
