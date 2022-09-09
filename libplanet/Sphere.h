@@ -7,11 +7,11 @@
 namespace libPlanet {
 
 class Sphere : public Point {
- private:
+private:
   double diameter;
 
- public:
-  Sphere(std::string nom, double x, double y, double z, double diameter);
+public:
+  Sphere(Point p, double diameter);
 
   /**
    * @brief Computes the volume of the sphere
@@ -26,7 +26,7 @@ class Sphere : public Point {
    * @param Point the point to get the distance from
    * @return the computed distance
    */
-  double distance(Point&) const override;
+  double distance(Point &) const override;
 
   /**
    * @brief Computes the distance between a Sphere and a Sphere
@@ -37,18 +37,18 @@ class Sphere : public Point {
    *
    * @return the computed distance
    */
-  double distance(Sphere&) const;
+  double distance(Sphere &) const;
 
   ~Sphere();
 
   /**
    * @brief compares the Spheres based on their diameter
    */
-  bool operator==(Sphere&);
-  bool operator<=(Sphere&);
-  bool operator>=(Sphere&);
-  bool operator>(Sphere&);
-  bool operator<(Sphere&);
+  bool operator==(Sphere &);
+  bool operator<=(Sphere &);
+  bool operator>=(Sphere &);
+  bool operator>(Sphere &);
+  bool operator<(Sphere &);
 };
 
-}  // namespace libPlanet
+} // namespace libPlanet

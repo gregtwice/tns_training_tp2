@@ -1,30 +1,26 @@
 #include "Point.h"
 
-#include <cmath>
-namespace libPlanet {
-Point::Point(std::string nom, double x, double y, double z)
-    : nom(nom), x(x), y(y), z(z) {}
+#include "Position.h"
 
-double Point::distance(Point& rhs) const {
-  double dx = this->x - rhs.x;
-  double dy = this->y - rhs.y;
-  double dz = this->z - rhs.z;
+#include <cmath>
+#include <string>
+namespace libPlanet {
+
+Point::Point(std::string name, Position p) : name(name), position(p) {}
+
+double Point::distance(Point &rhs) const {
+  double dx = this->position.x - rhs.position.x;
+  double dy = this->position.y - rhs.position.y;
+  double dz = this->position.z - rhs.position.z;
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-double Point::getX() {
-  return x;
-}
-double Point::getY() {
-  return y;
-}
-double Point::getZ() {
-  return z;
-}
-
-std::ostream& operator<<(std::ostream& os, const Point p) {
-  os << "Point:{ nom: " << p.nom << ", x: " << p.x << ", y: " << p.y
-     << ", z: " << p.z << " }";
+std::ostream &operator<<(std::ostream &os, const Point p) {
+  os << "Point:{ nom: " << p.name << ", x: " << p.position.x
+     << ", y: " << p.position.y << ", z: " << p.position.z << " }";
   return os;
 }
-}  // namespace libPlanet
+
+Position Point::getPosition() { return position; }
+std::string &Point::getName() { return name; }
+} // namespace libPlanet

@@ -3,20 +3,20 @@
 #include <iostream>
 #include <string>
 
+#include "Position.h"
+
 namespace libPlanet {
 
 class Point {
- private:
-  std::string nom;
-  double x;
-  double y;
-  double z;
+private:
+  std::string name;
+  Position position;
 
- public:
+public:
   /**
    * @brief Construct a new Point object from a name and 3D coordinates
    */
-  Point(std::string, double, double, double);
+  Point(std::string, Position);
 
   ~Point(){};
   /**
@@ -26,17 +26,17 @@ class Point {
    * @param p the Point streamed
    * @return std::ostream&
    */
-  friend std::ostream& operator<<(std::ostream& os, const Point p);
+  friend std::ostream &operator<<(std::ostream &os, const Point p);
 
-  double getX();
-  double getY();
-  double getZ();
   /**
    * @brief Computes the distance between two points
    *
    * @return double the computed distance
    */
-  virtual double distance(Point&) const;
+  virtual double distance(Point &) const;
+
+  Position getPosition();
+  std::string &getName();
 };
 
-}  // namespace libPlanet
+} // namespace libPlanet
