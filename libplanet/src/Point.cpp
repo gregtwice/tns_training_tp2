@@ -21,10 +21,10 @@ std::ostream& operator<<(std::ostream& os, const Point p) {
     return os;
 }
 
-Position Point::getPosition() {
+Position Point::getPosition() const {
     return position;
 }
-std::string& Point::getName() {
+std::string Point::getName() const {
     return name;
 }
 }  // namespace libPlanet

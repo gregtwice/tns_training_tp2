@@ -19,7 +19,7 @@ Sphere::Sphere(Sphere& s)
 
 Sphere::~Sphere() = default;
 
-double Sphere::getVolume() {
+double Sphere::getVolume() const {
     return 4 * M_PI * pow(_diameter / 2, 3) / 3;
 }
 
@@ -37,23 +37,23 @@ static bool almostEquals(double a, double b) {
     return std::abs(a - b) < epsilon;
 }
 
-bool Sphere::operator==(Sphere& rhs) {
+bool Sphere::operator==(Sphere& rhs) const {
     return almostEquals(_diameter, rhs._diameter);
 }
-bool Sphere::operator<=(Sphere& rhs) {
+bool Sphere::operator<=(Sphere& rhs) const {
     return _diameter <= rhs._diameter;
 }
-bool Sphere::operator>=(Sphere& rhs) {
+bool Sphere::operator>=(Sphere& rhs) const {
     return _diameter >= rhs._diameter;
 }
-bool Sphere::operator>(Sphere& rhs) {
+bool Sphere::operator>(Sphere& rhs) const {
     return _diameter > rhs._diameter;
 }
-bool Sphere::operator<(Sphere& rhs) {
+bool Sphere::operator<(Sphere& rhs) const {
     return _diameter < rhs._diameter;
 }
 
-double Sphere::getDiameter() {
+double Sphere::getDiameter() const {
     return _diameter;
 }
 

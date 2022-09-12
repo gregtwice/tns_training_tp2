@@ -1,5 +1,7 @@
 #include <iostream>
+#include <ostream>
 #include <string>
+#include <vector>
 
 #include "Astre.h"
 #include "Point.h"
@@ -65,8 +67,8 @@ void test_compare(libPlanet::Astre a, libPlanet::Sphere s) {
 
 void testAstres() {
     using namespace libPlanet;
-    Sphere s(Point("Sun", Position(0, 0, 0)), 20);
-    Sphere s1(Point("Sun", Position(0, 0, 0)), 30);
+    Sphere s(Point("Sun", Position(0, 1, 0)), 20);
+    Sphere s1(Point("Sun", Position(0, 0, 2)), 30);
     Astre a(s, 30);
 
     Astre a1(s1, 10);
@@ -74,4 +76,31 @@ void testAstres() {
     test_compare(a, s);
     test_compare(a, s1);
     test_compare(a1, s);
+
+    // 5,98.1024
+
+    /*
+        mean density | 5.515 g/cm^3 (grams per cubic centimeter)
+        mass | 5.97×10^24 kg (kilograms)
+        volume | 1.083207×10^21 m^3 (cubic meters)
+        average diameter | 12742.018 km (kilometers)
+    */
+    Sphere s2(Point("Earth", Position(0, 0, 0)), 12742000);
+
+    Astre earth(s2, 5515);
+
+    Astre moon(Point("Moon", Position(0, 3.8e8, 0)), 3480000, 3344);
+    std::cout << "E MASS : " << earth.getMass() << std::endl;
+    std::cout << "M MASS : " << moon.getMass() << std::endl;
+
+    std::cout << earth.distance_center(moon) << std::endl;
+    std::cout << earth.getAttraction(moon) << std::endl;
+    std::cout << moon.getAttraction(earth) << std::endl;
+
+    auto v = std::vector<Astre*>();
+    v.push_back(&moon);
+    v.push_back(&a1);
+    v.push_back(&a);
+
+    std::cout << earth.sumAttraction(v) << std::endl;
 }

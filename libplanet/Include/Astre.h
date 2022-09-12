@@ -3,6 +3,8 @@
 #include "Point.h"
 #include "Sphere.h"
 
+#include <vector>
+
 namespace libPlanet {
 class Astre : public Sphere {
    private:
@@ -32,14 +34,24 @@ class Astre : public Sphere {
      *
      * @return the mass
      */
-    double getMass();
+    double getMass() const;
 
     /**
      * @brief Get the Density of the sphere
      *
      * @return the density
      */
-    double getDensity();
+    double getDensity() const;
+
+    /**
+     * @brief computes the gravitation force applied to each Astre using
+     * Newton's law of universal gravitation
+     *
+     * @return double the computed gravitation force in Newtons
+     */
+    double getAttraction(Astre&);
+
+    double sumAttraction(std::vector<Astre*> list);
 
     bool operator==(Sphere&);
     bool operator<=(Sphere&);

@@ -29,7 +29,7 @@ class Sphere : public Point {
      *
      * @return the computed volume
      */
-    double getVolume();
+    double getVolume() const;
 
     /**
      * @brief Computes the distance between the Sphere and a point
@@ -55,13 +55,13 @@ class Sphere : public Point {
     /**
      * @brief compares the Spheres based on their diameter
      */
-    bool operator==(Sphere&);
-    bool operator<=(Sphere&);
-    bool operator>=(Sphere&);
-    bool operator>(Sphere&);
-    bool operator<(Sphere&);
+    bool operator==(Sphere&) const;
+    bool operator<=(Sphere&) const;
+    bool operator>=(Sphere&) const;
+    bool operator>(Sphere&) const;
+    bool operator<(Sphere&) const;
 
-    double getDiameter();
+    double getDiameter() const;
 };
 
 }  // namespace libPlanet

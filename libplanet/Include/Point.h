@@ -35,8 +35,8 @@ class Point {
      */
     virtual double distance(Point&) const;
 
-    Position getPosition();
-    std::string& getName();
+    Position getPosition() const;
+    std::string getName() const;
 };
 
 }  // namespace libPlanet
