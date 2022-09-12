@@ -1,6 +1,6 @@
 #pragma once
 
-// namespace libPlanet {
+namespace libPlanet {
 
 class Position {
 public:
@@ -11,4 +11,4 @@ public:
   Position(double, double, double);
   ~Position();
 };
-// } // namespace libPlanet
+} // namespace libPlanet

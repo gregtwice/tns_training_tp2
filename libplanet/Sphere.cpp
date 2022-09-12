@@ -10,15 +10,15 @@ namespace libPlanet {
 
 Sphere::Sphere(Point p, double diameter)
     : Point(p.getName(), p.getPosition()), diameter(diameter) {
-  std::cout << "Created a new planet at " << *this
-            << " of volume : " << volume() << "\n";
+  std::cout << "Created a new Sphere at " << *this
+            << " of volume : " << getVolume() << "\n";
 }
 
 Sphere::~Sphere() {}
 
-double Sphere::volume() { return 4 * M_PI * pow(diameter / 2, 3) / 3; }
+double Sphere::getVolume() { return 4 * M_PI * pow(diameter / 2, 3) / 3; }
 
-double Sphere::distance_centre(Point &rhs) const {
+double Sphere::distance_center(Point &rhs) const {
   return Point::distance(rhs);
 }
 
@@ -39,4 +39,9 @@ bool Sphere::operator<=(Sphere &rhs) { return diameter <= rhs.diameter; }
 bool Sphere::operator>=(Sphere &rhs) { return diameter >= rhs.diameter; }
 bool Sphere::operator>(Sphere &rhs) { return diameter > rhs.diameter; }
 bool Sphere::operator<(Sphere &rhs) { return diameter < rhs.diameter; }
+
+double Sphere::getDiameter() { return diameter; }
+
+Sphere::Sphere(Sphere &s)
+    : Point(s.getName(), s.getPosition()), diameter(s.getDiameter()) {}
 } // namespace libPlanet

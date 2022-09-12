@@ -12,13 +12,13 @@ private:
 
 public:
   Sphere(Point p, double diameter);
-
+  Sphere(Sphere &);
   /**
    * @brief Computes the volume of the sphere
    *
    * @return the computed volume
    */
-  double volume();
+  double getVolume();
 
   /**
    * @brief Computes the distance between the Sphere and a point
@@ -26,7 +26,7 @@ public:
    * @param Point the point to get the distance from
    * @return the computed distance
    */
-  double distance_centre(Point &) const;
+  double distance_center(Point &) const;
 
   /**
    * @brief Computes the distance between a Sphere and a Sphere
@@ -49,6 +49,8 @@ public:
   bool operator>=(Sphere &);
   bool operator>(Sphere &);
   bool operator<(Sphere &);
+
+  double getDiameter();
 };
 
 } // namespace libPlanet
