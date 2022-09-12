@@ -33,7 +33,7 @@ class Point {
      *
      * @return double the computed distance
      */
-    virtual double distance(Point&) const;
+    virtual double getDistance(Point&) const;
 
     Position getPosition() const;
 

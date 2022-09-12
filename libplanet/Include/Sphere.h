@@ -37,7 +37,7 @@ class Sphere : public Point {
      * @param Point the point to get the distance from
      * @return the computed distance
      */
-    double distance_center(Point&) const;
+    double getDistance_center(Point&) const;
 
     /**
      * @brief Computes the distance between a Sphere and a Sphere
@@ -48,7 +48,7 @@ class Sphere : public Point {
      *
      * @return the computed distance
      */
-    double distance(Sphere&) const;
+    double getDistance(Sphere&) const;
 
     ~Sphere();
 

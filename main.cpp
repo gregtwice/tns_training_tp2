@@ -29,9 +29,9 @@ void testDistances() {
     libPlanet::Point z1("unit distance z1", libPlanet::Position(0, 0, 1));
     std::cout << p1 << std::endl;
 
-    std::cout << p1.distance(x1) << std::endl;
-    std::cout << p1.distance(y1) << std::endl;
-    std::cout << p1.distance(z1) << std::endl;
+    std::cout << p1.getDistance(x1) << std::endl;
+    std::cout << p1.getDistance(y1) << std::endl;
+    std::cout << p1.getDistance(z1) << std::endl;
 }
 
 void testSpheres() {
@@ -45,12 +45,12 @@ void testSpheres() {
     // libPlanet::Sphere s2("Close to centre", 2, 0, 0, 2);
 
     std::cout << "Test equality " << (s1 == s2) << std::endl;
-    std::cout << "distance : " << s1.distance(s2) << std::endl;
+    std::cout << "distance : " << s1.getDistance(s2) << std::endl;
 
     // libPlanet::Point ps2 = static_cast<libPlanet::Point>(s2);
 
-    std::cout << "Distance : " << s1.distance(s2) << std::endl;
-    std::cout << "Distance : " << s1.distance_center(s2) << std::endl;
+    std::cout << "Distance : " << s1.getDistance(s2) << std::endl;
+    std::cout << "Distance : " << s1.getDistance_center(s2) << std::endl;
 }
 
 void printlneq(std::string str, std::string res) {
@@ -93,7 +93,7 @@ void testAstres() {
     std::cout << "E MASS : " << earth.getMass() << std::endl;
     std::cout << "M MASS : " << moon.getMass() << std::endl;
 
-    std::cout << earth.distance_center(moon) << std::endl;
+    std::cout << earth.getDistance_center(moon) << std::endl;
     std::cout << earth.getAttraction(moon) << std::endl;
     std::cout << moon.getAttraction(earth) << std::endl;
 

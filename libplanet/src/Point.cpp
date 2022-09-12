@@ -8,7 +8,7 @@ namespace libPlanet {
 
 Point::Point(std::string name, Position p) : name(name), position(p) {}
 
-double Point::distance(Point& rhs) const {
+double Point::getDistance(Point& rhs) const {
     double dx = this->position._x - rhs.position._x;
     double dy = this->position._y - rhs.position._y;
     double dz = this->position._z - rhs.position._z;

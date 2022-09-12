@@ -41,7 +41,7 @@ double Astre::getDensity() const {
 */
 double Astre::getAttraction(Astre& b) {
     const double G = 6.67430e-11;
-    const double d = distance_center(b);
+    const double d = getDistance_center(b);
     return (G * getMass() * b.getMass()) / (d * d);
 }
 

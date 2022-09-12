@@ -23,12 +23,12 @@ double Sphere::getVolume() const {
     return 4 * M_PI * pow(_diameter / 2, 3) / 3;
 }
 
-double Sphere::distance_center(Point& rhs) const {
-    return Point::distance(rhs);
+double Sphere::getDistance_center(Point& rhs) const {
+    return Point::getDistance(rhs);
 }
 
-double Sphere::distance(Sphere& s) const {
-    double rawDist = Point::distance(s);
+double Sphere::getDistance(Sphere& s) const {
+    double rawDist = Point::getDistance(s);
     return rawDist - (s._diameter + _diameter) / 2;
 }
 
