@@ -36,6 +36,7 @@ class Point {
     virtual double distance(Point&) const;
 
     Position getPosition() const;
+
     std::string getName() const;
 };
 

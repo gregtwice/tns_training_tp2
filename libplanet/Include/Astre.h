@@ -27,6 +27,7 @@ class Astre : public Sphere {
      * @param density  the density of the Astre
      */
     Astre(Point point, double diameter, double density);
+
     ~Astre() = default;
 
     /**
@@ -51,6 +52,14 @@ class Astre : public Sphere {
      */
     double getAttraction(Astre&);
 
+    /**
+     * @brief Computes the sum of the gravitation forces of all the astres in
+     * the list applied to the Astre
+     *
+     * @param list the list of Astres to calculate the gravitational force that
+     * they apply
+     * @return double the sum of all gravitational forces
+     */
     double sumAttraction(std::vector<Astre*> list);
 
     bool operator==(Sphere&);

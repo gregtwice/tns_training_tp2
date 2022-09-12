@@ -56,15 +56,19 @@ double Astre::sumAttraction(std::vector<Astre*> list) {
 bool Astre::operator==(Sphere& rhs) {
     return rhs == *this;
 }
+
 bool Astre::operator<=(Sphere& rhs) {
     return rhs >= *this;
 }
+
 bool Astre::operator>=(Sphere& rhs) {
     return rhs <= *this;
 }
+
 bool Astre::operator>(Sphere& rhs) {
     return rhs < *this;
 }
+
 bool Astre::operator<(Sphere& rhs) {
     return rhs > *this;
 }
@@ -72,15 +76,19 @@ bool Astre::operator<(Sphere& rhs) {
 bool Astre::operator==(Astre& rhs) {
     return getMass() == rhs.getMass();
 }
+
 bool Astre::operator<=(Astre& rhs) {
     return getMass() <= rhs.getMass();
 }
+
 bool Astre::operator>=(Astre& rhs) {
     return getMass() >= rhs.getMass();
 }
+
 bool Astre::operator>(Astre& rhs) {
     return getMass() > rhs.getMass();
 }
+
 bool Astre::operator<(Astre& rhs) {
     return getMass() < rhs.getMass();
 }

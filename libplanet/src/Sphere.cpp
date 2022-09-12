@@ -40,15 +40,19 @@ static bool almostEquals(double a, double b) {
 bool Sphere::operator==(Sphere& rhs) const {
     return almostEquals(_diameter, rhs._diameter);
 }
+
 bool Sphere::operator<=(Sphere& rhs) const {
     return _diameter <= rhs._diameter;
 }
+
 bool Sphere::operator>=(Sphere& rhs) const {
     return _diameter >= rhs._diameter;
 }
+
 bool Sphere::operator>(Sphere& rhs) const {
     return _diameter > rhs._diameter;
 }
+
 bool Sphere::operator<(Sphere& rhs) const {
     return _diameter < rhs._diameter;
 }
