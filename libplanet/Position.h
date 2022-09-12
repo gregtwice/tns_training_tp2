@@ -9,6 +9,6 @@ public:
   double z;
 
   Position(double, double, double);
-  ~Position(){};
+  ~Position();
 };
 // } // namespace libPlanet

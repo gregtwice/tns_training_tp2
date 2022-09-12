@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "Point.h"
-#include "Position.h"
-#include "Sphere.h"
+#include "libplanet/Point.h"
+#include "libplanet/Position.h"
+#include "libplanet/Sphere.h"
 
 void testDistances();
 void testSpheres();
