@@ -26,7 +26,7 @@ public:
    * @param Point the point to get the distance from
    * @return the computed distance
    */
-  double distance(Point &) const override;
+  double distance_centre(Point &) const;
 
   /**
    * @brief Computes the distance between a Sphere and a Sphere

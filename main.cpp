@@ -34,4 +34,9 @@ void testSpheres() {
 
   std::cout << "Test equality " << (s1 == s2) << std::endl;
   std::cout << "distance : " << s1.distance(s2) << std::endl;
+
+  // libPlanet::Point ps2 = static_cast<libPlanet::Point>(s2);
+
+  std::cout << "Distance : " << s1.distance(s2) << std::endl;
+  std::cout << "Distance : " << s1.distance_centre(s2) << std::endl;
 }
