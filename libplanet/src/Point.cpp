@@ -6,7 +6,7 @@
 #include <string>
 namespace libPlanet {
 
-Point::Point(std::string name, Position p) : name(name), position(p) {}
+Point::~Point() = default;
 
 double Point::getDistance(Point& rhs) const {
     double dx = this->position._x - rhs.position._x;

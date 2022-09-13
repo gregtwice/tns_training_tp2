@@ -18,7 +18,7 @@ class Point {
      */
     Point(std::string, Position);
 
-    ~Point(){};
+    ~Point();
     /**
      * @brief allows to easily stream a point
      *

@@ -28,7 +28,7 @@ class Astre : public Sphere {
      */
     Astre(Point point, double diameter, double density);
 
-    ~Astre() = default;
+    ~Astre();
 
     /**
      * @brief Returns the computed mass of the Astre

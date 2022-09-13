@@ -28,6 +28,8 @@ Astre::Astre(Point point, double diameter, double density)
               << std::endl;
 }
 
+Astre::~Astre() = default;
+
 double Astre::getMass() const {
     return getVolume() * _density;
 }
