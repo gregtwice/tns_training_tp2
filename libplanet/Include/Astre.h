@@ -9,6 +9,7 @@ namespace libPlanet {
 class Astre : public Sphere {
    private:
     double _density;
+    void printInit();
 
    public:
     /**

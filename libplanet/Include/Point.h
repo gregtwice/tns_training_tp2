@@ -12,6 +12,8 @@ class Point {
     std::string name;
     Position position;
 
+    void printInit();
+
    public:
     /**
      * @brief Construct a new Point object from a name and 3D coordinates

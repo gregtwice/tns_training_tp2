@@ -6,26 +6,23 @@
 
 namespace libPlanet {
 
-Astre::Astre(Sphere s, double density) : Sphere(s), _density(density) {
+void Astre::printInit() {
     auto pos = getPosition();
     double x = pos._x;
     double y = pos._y;
     double z = pos._z;
-
     std::cout << "Created an Astre of mass " << getMass() << ", and diameter "
               << getDiameter() << ", at (" << x << ", " << y << ", " << z << ")"
               << std::endl;
 }
 
+Astre::Astre(Sphere s, double density) : Sphere(s), _density(density) {
+    printInit();
+}
+
 Astre::Astre(Point point, double diameter, double density)
     : Sphere(point, diameter), _density(density) {
-    auto pos = getPosition();
-    double x = pos._x;
-    double y = pos._y;
-    double z = pos._z;
-    std::cout << "Created an Astre of mass " << getMass() << ", and diameter "
-              << getDiameter() << ", at (" << x << ", " << y << ", " << z << ")"
-              << std::endl;
+    printInit();
 }
 
 Astre::~Astre() = default;

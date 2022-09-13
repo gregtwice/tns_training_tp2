@@ -9,6 +9,7 @@ namespace libPlanet {
 class Sphere : public Point {
    private:
     double _diameter;
+    void printInit();
 
    public:
     /**

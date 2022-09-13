@@ -8,14 +8,20 @@
 #include "Position.h"
 namespace libPlanet {
 
-Sphere::Sphere(Point p, double diameter)
-    : Point(p.getName(), p.getPosition()), _diameter(diameter) {
+void Sphere::printInit() {
     std::cout << "Created a new Sphere at " << *this
               << " of volume : " << getVolume() << "\n";
 }
 
+Sphere::Sphere(Point p, double diameter)
+    : Point(p.getName(), p.getPosition()), _diameter(diameter) {
+    printInit();
+}
+
 Sphere::Sphere(Sphere& s)
-    : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {}
+    : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {
+    printInit();
+}
 
 Sphere::~Sphere() = default;
 
