@@ -7,17 +7,21 @@
 #include "Point.hpp"
 #include "Position.hpp"
 #include "Sphere.hpp"
+#include "MyArray.hpp"
+#include "mycollections/Include/MyArray.hpp"
 
 void testDistances();
 void testSpheres();
 void testAstres();
+void testArray();
 
 void println(std::string str) { std::cout << str << std::endl; }
 
 int main(int, char**) {
   // testDistances();
   // testSpheres();
-  testAstres();
+  // testAstres();
+  testArray();
 }
 
 void testDistances() {
@@ -98,4 +102,15 @@ void testAstres() {
   v.push_back(&a);
 
   std::cout << earth.sumAttraction(v) << std::endl;
+}
+
+void testArray() {
+  mycollections::Array<int*, 4> a;
+  int b = 1;
+  int c = 2;
+  int d = 3;
+
+  a[0] = &b;
+  // a[5] = &c;
+  std::cout << *a[0] << std::endl;
 }
