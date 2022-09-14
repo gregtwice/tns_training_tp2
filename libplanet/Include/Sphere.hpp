@@ -8,10 +8,6 @@
 namespace planets {
 
 class Sphere : public Point {
-private:
-  double _diameter;
-  void printInit();
-
 public:
   /**
    * @brief Construct a new Sphere object
@@ -64,6 +60,10 @@ public:
   bool operator<(Sphere&) const;
 
   double getDiameter() const;
+
+private:
+  double _diameter;
+  void printInit();
 };
 
 }  // namespace planets

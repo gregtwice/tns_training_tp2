@@ -8,10 +8,6 @@
 
 namespace planets {
 class Astre : public Sphere {
-private:
-  double _density;
-  void printInit();
-
 public:
   /**
    * @brief Construct a new Astre object
@@ -75,6 +71,10 @@ public:
   bool operator>=(Astre&);
   bool operator>(Astre&);
   bool operator<(Astre&);
+
+private:
+  double _density;
+  void printInit();
 };
 
 }  // namespace planets
