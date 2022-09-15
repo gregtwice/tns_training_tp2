@@ -2,12 +2,14 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <array>
 
 #include "Astre.hpp"
 #include "Point.hpp"
 #include "Position.hpp"
 #include "Sphere.hpp"
-#include "MyArray.hpp"
+#include "MyStaticArray.hpp"
+#include "MyStaticVector.hpp"
 
 void testDistances();
 void testSpheres();
@@ -19,8 +21,8 @@ void println(std::string str) { std::cout << str << std::endl; }
 int main(int, char**) {
   // testDistances();
   // testSpheres();
-  testAstres();
-  // testArray();
+  // testAstres();
+  testArray();
 }
 
 void testDistances() {
@@ -95,7 +97,7 @@ void testAstres() {
   std::cout << earth.getAttraction(moon) << std::endl;
   std::cout << moon.getAttraction(earth) << std::endl;
 
-  mycollections::Array<Astre*, 4> v;
+  mycollections::StaticVector<Astre*, 4> v;
   v.push(&moon);
   v.push(&a1);
   v.push(&a);
@@ -111,8 +113,8 @@ void testAstres() {
 }
 
 void testArray() {
-  mycollections::Array<int*, 4> a;
-  int b = 1;
+  mycollections::StaticVector<int*, 4> a;
+  int b = 42;
   int c = 2;
   int d = 3;
   int e = 4;
@@ -122,9 +124,29 @@ void testArray() {
   a[2] = &d;
   a[3] = &e;
 
-  std::cout << *a[0] << std::endl;
-
+  // doesn't do anything because the size did not get incremented with push
   for (auto it = a.begin(); it != a.end(); ++it) {
     std::cout << **it << std::endl;
   }
+
+  auto myarr = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
+  auto myarr2 = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
+
+  std::cout << "Testing static vector : same size = " << (myarr2 == myarr) << std::endl;
+
+  mycollections::StaticVector<int, 3> a3_1;
+  mycollections::StaticVector<int, 4> a3_2;
+
+  a3_1.push(1);
+  a3_1.push(2);
+  a3_1.push(3);
+  a3_2.push(1);
+  a3_2.push(2);
+  a3_2.push(3);
+
+  std::cout << "Testing static vector equality = " << (a3_1 == a3_2) << std::endl;
+
+  a3_1.pop();
+  a3_1.push(6766);
+  std::cout << "Testing static vector equality =" << (a3_1 == a3_2) << std::endl;
 }

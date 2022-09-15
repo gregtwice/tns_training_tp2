@@ -1,14 +1,15 @@
-#ifndef MYCOLLECTIONS_ARRAY_H
-#define MYCOLLECTIONS_ARRAY_H
+#ifndef MYCOLLECTIONS_STATICVECTOR_H
+#define MYCOLLECTIONS_STATICVECTOR_H
 
-#include <math.h>
+#include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <optional>
 
 namespace mycollections {
 
 template <class T, unsigned int N>
-class Array {
+class StaticVector {
 public:
   using value_type = T;
   using reference = T&;
@@ -22,11 +23,10 @@ public:
     return data[i];
   }
 
-  bool operator==(Array& that) {
-    if (that.getSize() != getSize()) return false;
-
+  bool operator==(StaticVector& that) {
+    if (that.getSize() != size) return false;
     for (auto ithis = begin(), ithat = that.begin(); ithis != end(); ithis++, ithat++) {
-      if (ithis != ithat) return false;
+      if (*ithis != *ithat) return false;
     }
     return true;
   }
@@ -38,8 +38,8 @@ public:
     return true;
   }
 
-  value_type pop() {
-    if (size == 0) return nullptr;
+  std::optional<value_type> pop() {
+    if (size == 0) return std::nullopt;
     value_type v = data[size];
     size--;
     return v;
@@ -59,4 +59,5 @@ private:
 };
 
 }  // namespace mycollections
-#endif
+
+#endif  // MYCOLLECTIONS_STATICVECTOR_H
