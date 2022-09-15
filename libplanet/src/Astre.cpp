@@ -41,14 +41,6 @@ double Astre::getAttraction(Astre& b) {
   return (G * getMass() * b.getMass()) / (d * d);
 }
 
-double Astre::sumAttraction(std::vector<Astre*> list) {
-  double sum = 0;
-  for (auto astre : list) {
-    sum += this->getAttraction(*astre);
-  }
-  return sum;
-}
-
 bool Astre::operator==(Sphere& rhs) { return rhs == *this; }
 
 bool Astre::operator<=(Sphere& rhs) { return rhs >= *this; }

@@ -7,10 +7,12 @@
 #include "Point.hpp"
 #include "Position.hpp"
 #include "Sphere.hpp"
+#include "MyArray.hpp"
 
 void testDistances();
 void testSpheres();
 void testAstres();
+void testArray();
 
 void println(std::string str) { std::cout << str << std::endl; }
 
@@ -18,6 +20,7 @@ int main(int, char**) {
   // testDistances();
   // testSpheres();
   testAstres();
+  // testArray();
 }
 
 void testDistances() {
@@ -92,10 +95,36 @@ void testAstres() {
   std::cout << earth.getAttraction(moon) << std::endl;
   std::cout << moon.getAttraction(earth) << std::endl;
 
-  auto v = std::vector<Astre*>();
-  v.push_back(&moon);
-  v.push_back(&a1);
-  v.push_back(&a);
+  mycollections::Array<Astre*, 4> v;
+  v.push(&moon);
+  v.push(&a1);
+  v.push(&a);
+  v.pop();
 
-  std::cout << earth.sumAttraction(v) << std::endl;
+  std::cout << "Second element of the Array :" << *v[1] << std::endl;
+  std::cout << "Array size : " << v.getSize() << " , array cap " << v.getCap() << std::endl;
+  v[0] = &moon;
+  v[1] = &a1;
+  v[2] = &a;
+
+  std::cout << "Gravitational force Applied to " << earth.getName() << " : " << earth.sumAttraction(v.begin(), v.end()) << std::endl;
+}
+
+void testArray() {
+  mycollections::Array<int*, 4> a;
+  int b = 1;
+  int c = 2;
+  int d = 3;
+  int e = 4;
+
+  a[0] = &b;
+  a[1] = &c;
+  a[2] = &d;
+  a[3] = &e;
+
+  std::cout << *a[0] << std::endl;
+
+  for (auto it = a.begin(); it != a.end(); ++it) {
+    std::cout << **it << std::endl;
+  }
 }
