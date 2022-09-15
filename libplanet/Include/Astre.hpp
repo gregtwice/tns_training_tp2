@@ -58,7 +58,15 @@ public:
    * they apply
    * @return double the sum of all gravitational forces
    */
-  double sumAttraction(std::vector<Astre*> list);
+  template <class Iterator>
+  double sumAttraction(Iterator first, Iterator last) {
+    double sum = 0;
+    for (auto it = first; it != last; it++) {
+      // the iterator is a pointer to a pointer so double dereference to get the value
+      sum += getAttraction(**it);
+    }
+    return sum;
+  }
 
   bool operator==(Sphere&);
   bool operator<=(Sphere&);
