@@ -132,10 +132,10 @@ void testArray() {
   auto myarr = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
   auto myarr2 = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
 
-  std::cout << "Testing static vector : same size = " << (myarr2 == myarr) << std::endl;
+  std::cout << "Testing static array : same size = " << (myarr2 == myarr) << std::endl;
 
   mycollections::StaticVector<int, 3> a3_1;
-  mycollections::StaticVector<int, 4> a3_2;
+  mycollections::StaticVector<int, 3> a3_2;
 
   a3_1.push(1);
   a3_1.push(2);
@@ -148,5 +148,5 @@ void testArray() {
 
   a3_1.pop();
   a3_1.push(6766);
-  std::cout << "Testing static vector equality =" << (a3_1 == a3_2) << std::endl;
+  std::cout << "Testing static vector equality = " << (a3_1 == a3_2) << std::endl;
 }
