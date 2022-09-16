@@ -59,6 +59,14 @@ public:
     size = 0;
   }
 
+  /**
+   * @brief Checks if the vector contains the other vector passed by reference
+   *
+   * @tparam S the size of the vector to check
+   * @param that the vector to check
+   * @return true 'that' is not contained in the vector
+   * @return false 'that' is not contained in the vector
+   */
   template <std::size_t S>
   bool contains(StaticVector<T, S>& that) {
     if (size < that.getSize()) {
@@ -119,8 +127,6 @@ public:
   Iterator<T> iter() {
     return Iterator<T>(this->begin(), this->end());
   }
-
-  constexpr static const unsigned int cap2 = N;
 
 private:
   unsigned int size = 0;
