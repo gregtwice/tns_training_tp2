@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iterator>
 #include <ostream>
 #include <string>
 #include <vector>
@@ -12,6 +13,7 @@
 #include "MyStaticVector.hpp"
 
 void testDistances();
+void testIterator();
 void testSpheres();
 void testAstres();
 void testArray();
@@ -20,6 +22,7 @@ void println(std::string str) { std::cout << str << std::endl; }
 
 int main(int, char**) {
   // testDistances();
+  testIterator();
   // testSpheres();
   // testAstres();
   testArray();
@@ -109,7 +112,7 @@ void testAstres() {
   v[1] = &a1;
   v[2] = &a;
 
-  std::cout << "Gravitational force Applied to " << earth.getName() << " : " << earth.sumAttraction(v.begin(), v.end()) << std::endl;
+  // std::cout << "Gravitational force Applied to " << earth.getName() << " : " << earth.sumAttraction(v.begin(), v.end()) << std::endl;
 }
 
 void testArray() {
@@ -125,9 +128,9 @@ void testArray() {
   a[3] = &e;
 
   // doesn't do anything because the size did not get incremented with push
-  for (auto it = a.begin(); it != a.end(); ++it) {
-    std::cout << **it << std::endl;
-  }
+  // for (auto it = a.begin(); it != a.end(); ++it) {
+  //   std::cout << **it << std::endl;
+  // }
 
   auto myarr = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
   auto myarr2 = mycollections::StaticArray<int, 4>{{1, 2, 3, 4}};
@@ -149,4 +152,55 @@ void testArray() {
   a3_1.pop();
   a3_1.push(6766);
   std::cout << "Testing static vector equality = " << (a3_1 == a3_2) << std::endl;
+
+  println("--- Vector contains !!! ---");
+
+  mycollections::StaticVector<int, 10> ten;
+  for (int i = 0; i < 10; i++) {
+    ten.push(i);
+  }
+  constexpr int fourSize = 4;
+  mycollections::StaticVector<int, fourSize> four;
+  for (int i = 1; i < 5; i++) {
+    four.push(i);
+  }
+  println("0..10 contains 1..5 ?");
+  std::cout << (ten.contains<four.getCap()>(four)) << std::endl;
+
+  four.clear();
+  for (int i = 10; i < 14; i++) {
+    four.push(i);
+  }
+  println("0..10 contains 10..14 ?");
+  std::cout << (ten.contains<four.getCap()>(four)) << std::endl;
+
+  println("10..14 contains 0..10?");
+  std::cout << (four.contains<ten.getCap()>(ten)) << std::endl;
+}
+
+void testIterator() {
+  mycollections::StaticVector<int, 4> a;
+  a.push(1);
+  a.push(2);
+  a.push(3);
+  a.push(4);
+
+  println("Count :");
+  std::cout << a.iter().count() << std::endl;
+
+  println("---IT---");
+  auto it = a.iter();
+
+  std::cout << *it << std::endl;
+  it.next();
+  std::cout << *it << std::endl;
+  auto last = it.last();
+  std::cout << last << std::endl;
+
+  println("---IT number 2 ---");
+  auto it2 = a.iter();
+
+  while (it2.hasNext()) {
+    std::cout << ((it2.next())) << std::endl;
+  }
 }
