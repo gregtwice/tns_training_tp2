@@ -5,15 +5,16 @@
 
 #include "Point.hpp"
 #include "Position.hpp"
+#include "Validator.hpp"
 
 namespace planets {
 
 void Sphere::printInit() {
-  std::cout << "Created a new Sphere at " << *this
+  std::cout << "Created a new Sphere" << *this
             << " of volume : " << getVolume() << "\n";
 }
 
-Sphere::Sphere(Point p, double diameter)
+Sphere::Sphere(Point& p, double diameter)
     : Point(p.getName(), p.getPosition()), _diameter(diameter) {
   printInit();
 }
@@ -21,6 +22,17 @@ Sphere::Sphere(Point p, double diameter)
 Sphere::Sphere(Sphere& s)
     : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {
   printInit();
+}
+
+Sphere Sphere::sphereFromUserInput() {
+  std::string userInput;
+  double diameter;
+  Point p = Point::pointFromUserInput();
+
+  diameter = utils::Validator::validateDouble("What is the diameter of the object?\n>>> ",
+    "Invalid Input! Please input a numerical value.");
+
+  return Sphere(p, diameter);
 }
 
 Sphere::~Sphere() = default;
@@ -61,6 +73,23 @@ bool Sphere::operator>(Sphere& rhs) const {
 
 bool Sphere::operator<(Sphere& rhs) const {
   return _diameter < rhs._diameter;
+}
+
+void Sphere::print(std::ostream& os) const {
+  auto pos = getPosition();
+  double x = pos._x;
+  double y = pos._y;
+  double z = pos._z;
+  os << "Sphere:{"
+     << "name: \"" << getName() << "\""
+     << ", position: [" << x << "; " << y << "; " << z << "]"
+     << ", diameter: " << _diameter
+     << "}";
+}
+
+std::ostream& operator<<(std::ostream& os, Sphere& s) {
+  s.print(os);
+  return os;
 }
 
 double Sphere::getDiameter() const { return _diameter; }

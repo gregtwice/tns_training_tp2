@@ -2,6 +2,7 @@
 #define planets_SPHERE_HPP
 
 #include <string>
+#include <string_view>
 
 #include "Point.hpp"
 
@@ -14,13 +15,15 @@ public:
    * @param p a Point which holds the sphere's coordinates
    * @param diameter the diameter of the sphere
    */
-  Sphere(Point p, double diameter);
+  Sphere(Point& p, double diameter);
 
   /**
    * @brief Construct a new Sphere object
    * Copies the sphere object
    */
   Sphere(Sphere&);
+
+  static Sphere sphereFromUserInput();
 
   /**
    * @brief Computes the volume of the sphere
@@ -59,7 +62,18 @@ public:
   bool operator>(Sphere&) const;
   bool operator<(Sphere&) const;
 
+  virtual void print(std::ostream& where) const;
+
+  friend std::ostream& operator<<(std::ostream& os, Sphere& s);
+
   double getDiameter() const;
+
+  static constexpr auto savePattern =
+    "Sphere:\\{"
+    "name: \"([0-9a-zA-Z ]+)\", "
+    "position: \\[([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+)\\], "
+    "diameter: ([+-]?[0-9]*[.]?[0-9]+)"
+    "\\}";
 
 private:
   double _diameter;

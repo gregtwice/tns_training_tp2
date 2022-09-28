@@ -10,12 +10,14 @@ target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_17)
 
 #Libraries
 
-set(LIBS "libplanet" "mycollections")
+set(LIBS "libplanet" "mycollections" "cli" "utils")
+
+# add_subdirectory(src)
 
 foreach(DIR ${LIBS})
-    add_subdirectory(${DIR})
+    add_subdirectory(${PROJECT_SOURCE_DIR}/src/${DIR})
     target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${DIR})
-    target_include_directories(${EXECUTABLE_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/${DIR}/Include)
+    target_include_directories(${EXECUTABLE_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/src/${DIR}/Include)
 endforeach()
 
 # for vs code

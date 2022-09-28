@@ -1,8 +1,9 @@
 #ifndef planets_ASTRE_HPP
 #define planets_ASTRE_HPP
 
+#include <string_view>
 #include <vector>
-
+#include <memory>
 #include "Point.hpp"
 #include "Sphere.hpp"
 
@@ -15,7 +16,7 @@ public:
    * @param sphere a sphere upon which the Astre will be based
    * @param density the Astre's density
    */
-  Astre(Sphere sphere, double density);
+  Astre(Sphere& sphere, double density);
 
   /**
    * @brief Construct a new Astre object
@@ -24,7 +25,15 @@ public:
    * @param diameter the diameter of the Astre
    * @param density  the density of the Astre
    */
-  Astre(Point point, double diameter, double density);
+  Astre(Point& point, double diameter, double density);
+
+  Astre(Astre& other);
+
+  /**
+   * @brief Creates an astre interractively
+   * @return an Astre
+   */
+  static Astre astreFromUserInput();
 
   ~Astre();
 
@@ -79,6 +88,18 @@ public:
   bool operator>=(Astre&);
   bool operator>(Astre&);
   bool operator<(Astre&);
+
+  void print(std::ostream& where) const override;
+
+  friend std::ostream& operator<<(std::ostream& os, const Astre& a);
+
+  static constexpr auto savePattern =
+    "Astre:\\{"
+    "name: \"([0-9a-zA-Z ]+)\", "
+    "position: \\[([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+)\\], "
+    "diameter: ([+-]?[0-9]*[.]?[0-9]+), "
+    "density: ([+-]?[0-9]*[.]?[0-9]+)"
+    "\\}";
 
 private:
   double _density;
