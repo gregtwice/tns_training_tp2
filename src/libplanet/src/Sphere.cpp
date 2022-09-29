@@ -1,13 +1,16 @@
 #include "Sphere.hpp"
 
+
 #include <cmath>
 #include <string>
+#include <regex>
 
 #include "Point.hpp"
 #include "Position.hpp"
 #include "Validator.hpp"
 
 namespace planets {
+
 
 void Sphere::printInit() {
   std::cout << "Created a new Sphere" << *this
@@ -16,20 +19,29 @@ void Sphere::printInit() {
 
 Sphere::Sphere(Point& p, double diameter)
     : Point(p.getName(), p.getPosition()), _diameter(diameter) {
-  printInit();
+    Sphere::printInit();
 }
 
 Sphere::Sphere(Sphere& s)
     : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {
-  printInit();
+    Sphere::printInit();
+}
+
+Sphere::Sphere(const std::string& str) {
+  static std::regex sphereRx(savePattern);
+  std::smatch m;
+  std::regex_match(str, m, sphereRx);
+  Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
+  setName(m[1]);
+  setPosition(p);
+  _diameter = std::stod(m[5]);
 }
 
 Sphere Sphere::sphereFromUserInput() {
   std::string userInput;
-  double diameter;
   Point p = Point::pointFromUserInput();
 
-  diameter = utils::Validator::validateDouble("What is the diameter of the object?\n>>> ",
+  const double diameter = utils::Validator::validateDouble("What is the diameter of the object?\n>>> ",
     "Invalid Input! Please input a numerical value.");
 
   return Sphere(p, diameter);
@@ -46,12 +58,12 @@ double Sphere::getDistance_center(Point& rhs) const {
 }
 
 double Sphere::getDistance(Sphere& s) const {
-  double rawDist = Point::getDistance(s);
+  const double rawDist = Point::getDistance(s);
   return rawDist - (s._diameter + _diameter) / 2;
 }
 
 static bool almostEquals(double a, double b) {
-  const double epsilon = 0.00001;
+  constexpr double epsilon = 0.00001;
   return std::abs(a - b) < epsilon;
 }
 
@@ -93,5 +105,7 @@ std::ostream& operator<<(std::ostream& os, Sphere& s) {
 }
 
 double Sphere::getDiameter() const { return _diameter; }
+
+void Sphere::setDiameter(const double d) { _diameter = d; }
 
 }  // namespace planets

@@ -24,7 +24,7 @@ void UserInterface::printCreatingMenu() {
             << "4) Go back\n";
 }
 
-std::string UserInterface::readLine() {
+std::string UserInterface::readLine() const {
   std::string userInput;
   std::cout << ">>> ";
   std::getline(std::cin, userInput);
@@ -39,7 +39,7 @@ static void printIterator(T iter) {
   }
 }
 
-void UserInterface::handleSaving() {
+void UserInterface::handleSavingToFile() {
   std::filesystem::path saveFilePath = ".";
 
   std::string fileName = utils::Validator::validateASCIIString("What is the name of the file you want to save to? \n>>>");
@@ -57,7 +57,7 @@ void UserInterface::handleSaving() {
   saveFileHandle.close();
 }
 
-void UserInterface::handleLoading() {
+void UserInterface::handleLoadingFromSaveFile() {
   namespace fs = std::filesystem;
   fs::path p = fs::current_path();
 
@@ -79,23 +79,14 @@ void UserInterface::handleLoading() {
   std::smatch m;
 
   while (std::getline(infile, line)) {
+    std::cout << line;
     if (std::regex_match(line, m, pointRx)) {
-      planets::Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
-
-      objects.push(std::make_shared<planets::Point>(m[1], p));
-
+      std::cout << "Point ??\n";
+      objects.push(std::make_shared<planets::Point>(line));
     } else if (std::regex_match(line, m, sphereRx)) {
-      planets::Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
-      planets::Point tempP(m[1], p);
-
-      objects.push(std::make_shared<planets::Sphere>(tempP, std::stod(m[5])));
-
+      objects.push(std::make_shared<planets::Sphere>(line));
     } else if (std::regex_match(line, m, astreRx)) {
-      planets::Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
-      planets::Point tempP(m[1], p);
-      planets::Sphere s(tempP, std::stod(m[5]));
-
-      objects.push(std::make_shared<planets::Astre>(s, std::stod(m[6])));
+      objects.push(std::make_shared<planets::Astre>(line));
     }
   }
 }
@@ -120,10 +111,10 @@ void UserInterface::handleInput() {
           state = UserInterfaceState::CREATING;
           break;
         case 3:
-          handleSaving();
+          handleSavingToFile();
           break;
         case 4:
-          handleLoading();
+          handleLoadingFromSaveFile();
           break;
         case 5:
           exit(0);
@@ -173,7 +164,7 @@ void UserInterface::loop() {
   }
 }
 
-void UserInterface::printBaseMenu() {
+void UserInterface::printMainMenu() {
   std::cout << "\n======Planet Calculator=====" << std::endl;
   std::cout << "Select an action :\n\t"
             << "1) List all objects\n\t"
@@ -186,7 +177,7 @@ void UserInterface::printBaseMenu() {
 void UserInterface::printMenu() {
   switch (state) {
     case UserInterfaceState::MENU:
-      printBaseMenu();
+      printMainMenu();
       break;
     case UserInterfaceState::CREATING:
       printCreatingMenu();

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <regex>
 
 #include "Point.hpp"
 #include "Sphere.hpp"
@@ -20,23 +21,36 @@ void Astre::printInit() {
 }
 
 Astre::Astre(Sphere& s, double density) : Sphere(s), _density(density) {
-  printInit();
+  Astre::printInit();
 }
 
 Astre::Astre(Point& point, double diameter, double density)
     : Sphere(point, diameter), _density(density) {
-  printInit();
+    Astre::printInit();
 }
 
-Astre::Astre(Astre& other) : Sphere(other), _density(other._density){};
+Astre::Astre(Astre& other) : Sphere(other), _density(other._density){}
+
+Astre::Astre(const std::string& str) {
+  std::regex astreRx(savePattern);
+  std::smatch m;
+
+  std::regex_match(str, m, astreRx);
+
+  Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
+  setPosition(p);
+
+  setName(m[1]);
+  setDiameter(std::stod(m[5]));
+  _density =  std::stod(m[6]);
+};
 
 // Astre::Astre(Astre&& other) : Sphere(other), _density(other._density) {}
 
 Astre Astre::astreFromUserInput() {
-  double density;
   Sphere s = Sphere::sphereFromUserInput();
   std::cout << "What is the density of the object?\n>>>";
-  density = utils::Validator::validateDouble("What is the density of the object?\n>>>",
+  const double density = utils::Validator::validateDouble("What is the density of the object?\n>>>",
     "Invalid Input! Please input a numerical value.");
 
   return Astre(s, density);
@@ -51,31 +65,31 @@ double Astre::getDensity() const { return _density; }
 /**
 {F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}
 */
-double Astre::getAttraction(Astre& b) {
+double Astre::getAttraction(Astre& b) const {
   const double G = 6.67430e-11;
   const double d = getDistance_center(b);
   return (G * getMass() * b.getMass()) / (d * d);
 }
 
-bool Astre::operator==(Sphere& rhs) { return rhs == *this; }
+bool Astre::operator==(const Sphere& rhs) { return rhs == *this; }
 
-bool Astre::operator<=(Sphere& rhs) { return rhs >= *this; }
+bool Astre::operator<=(const Sphere& rhs) { return rhs >= *this; }
 
-bool Astre::operator>=(Sphere& rhs) { return rhs <= *this; }
+bool Astre::operator>=(const Sphere& rhs) { return rhs <= *this; }
 
-bool Astre::operator>(Sphere& rhs) { return rhs < *this; }
+bool Astre::operator>(const Sphere& rhs) { return rhs < *this; }
 
-bool Astre::operator<(Sphere& rhs) { return rhs > *this; }
+bool Astre::operator<(const Sphere& rhs) { return rhs > *this; }
 
-bool Astre::operator==(Astre& rhs) { return getMass() == rhs.getMass(); }
+bool Astre::operator==(const Astre& rhs) const { return getMass() == rhs.getMass(); }
 
-bool Astre::operator<=(Astre& rhs) { return getMass() <= rhs.getMass(); }
+bool Astre::operator<=(const Astre& rhs) const { return getMass() <= rhs.getMass(); }
 
-bool Astre::operator>=(Astre& rhs) { return getMass() >= rhs.getMass(); }
+bool Astre::operator>=(const Astre& rhs) const { return getMass() >= rhs.getMass(); }
 
-bool Astre::operator>(Astre& rhs) { return getMass() > rhs.getMass(); }
+bool Astre::operator>(const Astre& rhs) const  { return getMass() > rhs.getMass(); }
 
-bool Astre::operator<(Astre& rhs) { return getMass() < rhs.getMass(); }
+bool Astre::operator<(const Astre& rhs) const { return getMass() < rhs.getMass(); }
 
 void Astre::print(std::ostream& os) const {
   auto pos = getPosition();

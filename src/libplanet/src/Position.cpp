@@ -6,7 +6,9 @@
 
 namespace planets {
 
-Position::Position(double x, double y, double z) : _x(x), _y(y), _z(z) {}
+Position::Position(const double x, const double y, const double z) : _x(x), _y(y), _z(z) {}
+
+Position::Position() : _x(0), _y(0), _z(0) {}
 
 // Position::Position(Position& other) : _x(other._x), _y(other._y), _z(other._z) {}
 

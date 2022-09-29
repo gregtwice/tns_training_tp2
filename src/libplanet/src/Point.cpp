@@ -10,39 +10,55 @@
 namespace planets {
 
 void Point::printInit() {
-  double x = position._x;
-  double y = position._y;
-  double z = position._z;
-  std::cout << "Creating a point of name " << name << " At Coordinates : {" << x
+  double x = _position._x;
+  double y = _position._y;
+  double z = _position._z;
+  std::cout << "Creating a point of name " << _name << " At Coordinates : {" << x
             << ", " << y << ", " << z << "}" << std::endl;
 }
 
-Point::Point(const std::string& name, const Position& p) : name(name), position(p) {
-  printInit();
+Point::Point(std::string name, const Position& p) : _name(std::move(name)), _position(p) {
+  Point::printInit();
 }
 
-Point::Point(const Point& other) : name(other.name), position(other.position) {}
+Point::Point(const Point& other) : _name(other._name), _position(other._position) {}
+
+Point::Point(const std::string& str) {
+  const std::regex pointRx(savePattern);
+  std::smatch m;
+  std::regex_match(str, m, pointRx);
+  Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
+  _position = p;
+  _name = m[1];
+  Point::printInit();
+}
+
+
 
 Point::~Point() = default;
 
 double Point::getDistance(const Point& rhs) const {
-  double dx = this->position._x - rhs.position._x;
-  double dy = this->position._y - rhs.position._y;
-  double dz = this->position._z - rhs.position._z;
+  const double dx = this->_position._x - rhs._position._x;
+  const double dy = this->_position._y - rhs._position._y;
+  const double dz = this->_position._z - rhs._position._z;
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-void Point::print(std::ostream& os) const {
-  os << "Point:{name: \"" << name << "\", position: [" << position._x << "; " << position._y << "; " << position._z << "]}";
+void Point::print(std::ostream& where) const {
+  where << "Point:{name: \"" << _name << "\", position: [" << _position._x << "; " << _position._y << "; " << _position._z << "]}";
 }
+
+Point::Point() = default;
 
 std::ostream& operator<<(std::ostream& os, const Point& p) {
   p.print(os);
   return os;
 }
 
-Position Point::getPosition() const { return position; }
-std::string Point::getName() const { return name; }
+Position Point::getPosition() const { return _position; }
+std::string Point::getName() const { return _name; }
+
+void Point::setName(const std::string& name) { _name = name; }
 
 Point Point::pointFromUserInput() {
   std::string userInput = "default";
@@ -53,14 +69,6 @@ Point Point::pointFromUserInput() {
   return Point(userInput, p);
 }
 
-std::optional<Point> Point::fromString(std::string& str) {
-  std::regex pointRx(savePattern);
-  std::smatch m;
-  if (std::regex_match(str, m, pointRx)) {
-    Position p(std::stod(m[2]), std::stod(m[3]), std::stod(m[4]));
-    return Point(m[1], p);
-  }
-  return std::nullopt;
-}
+
 
 }  // namespace planets

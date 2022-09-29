@@ -2,9 +2,7 @@
 #define planets_POINT_HPP
 
 #include <iostream>
-#include <optional>
 #include <string>
-#include <string_view>
 
 #include "Position.hpp"
 
@@ -15,13 +13,21 @@ public:
   /**
    * @brief Construct a new Point object from a name and 3D coordinates
    */
-  Point(const std::string&, const Position&);
+  Point(std::string, const Position&);
 
+  /**
+   * @brief Constructs a Point by copying another Point
+   * @param other the point to copy
+  */
   Point(const Point& other);
 
-  Point(Point&& other) = default;
+  /**
+   * @brief Constructs a Point from a serialized string
+   * @param str the serialized string
+  */
+  Point(const std::string& str);
 
-  ~Point();
+  virtual ~Point();
   /**
    * @brief allows to easily stream a point
    *
@@ -40,21 +46,31 @@ public:
 
   Position getPosition() const;
 
+  void setPosition(const Position& pos) { _position = pos; }
+
   std::string getName() const;
 
-  static Point pointFromUserInput();
+  void setName(const std::string& name);
 
-  static std::optional<Point> fromString(std::string& str);
+
+  /**
+   * @brief Creates a point with interactive user input
+   * @return a new Point
+  */
+  static Point pointFromUserInput();
 
   virtual void print(std::ostream& where) const;
 
   static constexpr auto& savePattern = "Point:\\{name: \"([0-9a-zA-Z ]+)\", position: \\[([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+)\\]\\}";
 
-private:
-  std::string name;
-  Position position;
+  protected:
+  Point();
 
-  void printInit();
+private:
+  std::string _name;
+  Position _position;
+
+  virtual void printInit();
 };
 
 }  // namespace planets

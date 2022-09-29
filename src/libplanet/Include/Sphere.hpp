@@ -2,7 +2,6 @@
 #define planets_SPHERE_HPP
 
 #include <string>
-#include <string_view>
 
 #include "Point.hpp"
 
@@ -22,6 +21,8 @@ public:
    * Copies the sphere object
    */
   Sphere(Sphere&);
+
+  Sphere(const std::string& str);
 
   static Sphere sphereFromUserInput();
 
@@ -75,9 +76,14 @@ public:
     "diameter: ([+-]?[0-9]*[.]?[0-9]+)"
     "\\}";
 
+protected:
+  Sphere() = default;
+
+  void setDiameter(const double d);
+
 private:
   double _diameter;
-  void printInit();
+  void printInit() override;
 };
 
 }  // namespace planets

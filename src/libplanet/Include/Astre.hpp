@@ -27,15 +27,27 @@ public:
    */
   Astre(Point& point, double diameter, double density);
 
+  
+  /**
+   * @brief Constructs a Astre object by copying the properties of the other Astre object
+   * @param other the object to copy
+   */
   Astre(Astre& other);
 
+
   /**
-   * @brief Creates an astre interractively
+   * \brief Creates a new Astre object by parsing the string representing the serialized object
+   * \param str the string to parse
+   */
+  Astre(const std::string& str);
+
+  /**
+   * @brief Creates an astre interactively
    * @return an Astre
    */
   static Astre astreFromUserInput();
 
-  ~Astre();
+  ~Astre() override;
 
   /**
    * @brief Returns the computed mass of the Astre
@@ -57,7 +69,7 @@ public:
    *
    * @return double the computed gravitation force in Newtons
    */
-  double getAttraction(Astre&);
+  double getAttraction(Astre&) const;
 
   /**
    * @brief Computes the sum of the gravitation forces of all the astres in
@@ -77,22 +89,30 @@ public:
     return sum;
   }
 
-  bool operator==(Sphere&);
-  bool operator<=(Sphere&);
-  bool operator>=(Sphere&);
-  bool operator>(Sphere&);
-  bool operator<(Sphere&);
+  bool operator==(const Sphere&);
+  bool operator<=(const Sphere&);
+  bool operator>=(const Sphere&);
+  bool operator>(const Sphere&);
+  bool operator<(const Sphere&);
 
-  bool operator==(Astre&);
-  bool operator<=(Astre&);
-  bool operator>=(Astre&);
-  bool operator>(Astre&);
-  bool operator<(Astre&);
+  bool operator==(const Astre&) const;
+  bool operator<=(const Astre&) const;
+  bool operator>=(const Astre&) const;
+  bool operator>(const Astre&) const;
+  bool operator<(const Astre&) const;
+
 
   void print(std::ostream& where) const override;
 
   friend std::ostream& operator<<(std::ostream& os, const Astre& a);
 
+  
+  /**
+   * \brief Regex pattern to deserialize the Astre object
+   *
+   * Example of the serialised string :
+   * Astre:{name : "<name>", position: [2; 4.5; 3], diameter: 5.0, density: 1}
+   */
   static constexpr auto savePattern =
     "Astre:\\{"
     "name: \"([0-9a-zA-Z ]+)\", "
@@ -103,7 +123,7 @@ public:
 
 private:
   double _density;
-  void printInit();
+  void printInit() override;
 };
 
 }  // namespace planets

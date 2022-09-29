@@ -19,6 +19,8 @@ public:
    */
   Position(double x, double y, double z);
 
+  Position();
+
   // Position(Position& other);
 
   static Position positionFromUserInput();
