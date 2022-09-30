@@ -1,8 +1,6 @@
 #include <iostream>
-#include <iterator>
 #include <ostream>
 #include <string>
-#include <vector>
 
 #include "UserInterface.hpp"
 
