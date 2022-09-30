@@ -33,8 +33,6 @@ Point::Point(const std::string& str) {
   Point::printInit();
 }
 
-
-
 Point::~Point() = default;
 
 double Point::getDistance(const Point& rhs) const {
@@ -68,7 +66,5 @@ Point Point::pointFromUserInput() {
 
   return Point(userInput, p);
 }
-
-
 
 }  // namespace planets

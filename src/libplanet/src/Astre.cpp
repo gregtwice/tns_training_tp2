@@ -26,10 +26,10 @@ Astre::Astre(Sphere& s, double density) : Sphere(s), _density(density) {
 
 Astre::Astre(Point& point, double diameter, double density)
     : Sphere(point, diameter), _density(density) {
-    Astre::printInit();
+  Astre::printInit();
 }
 
-Astre::Astre(Astre& other) : Sphere(other), _density(other._density){}
+Astre::Astre(Astre& other) : Sphere(other), _density(other._density) {}
 
 Astre::Astre(const std::string& str) {
   std::regex astreRx(savePattern);
@@ -42,7 +42,7 @@ Astre::Astre(const std::string& str) {
 
   setName(m[1]);
   setDiameter(std::stod(m[5]));
-  _density =  std::stod(m[6]);
+  _density = std::stod(m[6]);
 };
 
 // Astre::Astre(Astre&& other) : Sphere(other), _density(other._density) {}
@@ -87,7 +87,7 @@ bool Astre::operator<=(const Astre& rhs) const { return getMass() <= rhs.getMass
 
 bool Astre::operator>=(const Astre& rhs) const { return getMass() >= rhs.getMass(); }
 
-bool Astre::operator>(const Astre& rhs) const  { return getMass() > rhs.getMass(); }
+bool Astre::operator>(const Astre& rhs) const { return getMass() > rhs.getMass(); }
 
 bool Astre::operator<(const Astre& rhs) const { return getMass() < rhs.getMass(); }
 

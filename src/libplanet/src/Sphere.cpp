@@ -1,6 +1,5 @@
 #include "Sphere.hpp"
 
-
 #include <cmath>
 #include <string>
 #include <regex>
@@ -11,7 +10,6 @@
 
 namespace planets {
 
-
 void Sphere::printInit() {
   std::cout << "Created a new Sphere" << *this
             << " of volume : " << getVolume() << "\n";
@@ -19,12 +17,12 @@ void Sphere::printInit() {
 
 Sphere::Sphere(Point& p, double diameter)
     : Point(p.getName(), p.getPosition()), _diameter(diameter) {
-    Sphere::printInit();
+  Sphere::printInit();
 }
 
 Sphere::Sphere(Sphere& s)
     : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {
-    Sphere::printInit();
+  Sphere::printInit();
 }
 
 Sphere::Sphere(const std::string& str) {

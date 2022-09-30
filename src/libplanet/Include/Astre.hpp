@@ -27,13 +27,11 @@ public:
    */
   Astre(Point& point, double diameter, double density);
 
-  
   /**
    * @brief Constructs a Astre object by copying the properties of the other Astre object
    * @param other the object to copy
    */
   Astre(Astre& other);
-
 
   /**
    * \brief Creates a new Astre object by parsing the string representing the serialized object
@@ -101,12 +99,10 @@ public:
   bool operator>(const Astre&) const;
   bool operator<(const Astre&) const;
 
-
   void print(std::ostream& where) const override;
 
   friend std::ostream& operator<<(std::ostream& os, const Astre& a);
 
-  
   /**
    * \brief Regex pattern to deserialize the Astre object
    *

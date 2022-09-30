@@ -10,8 +10,6 @@ Position::Position(const double x, const double y, const double z) : _x(x), _y(y
 
 Position::Position() : _x(0), _y(0), _z(0) {}
 
-// Position::Position(Position& other) : _x(other._x), _y(other._y), _z(other._z) {}
-
 Position::~Position() = default;
 
 Position Position::positionFromUserInput() {

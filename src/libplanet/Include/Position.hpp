@@ -21,8 +21,6 @@ public:
 
   Position();
 
-  // Position(Position& other);
-
   static Position positionFromUserInput();
 
   friend std::ostream& operator<<(std::ostream& o, const Position p);
