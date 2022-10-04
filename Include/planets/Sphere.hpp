@@ -63,7 +63,7 @@ public:
   bool operator>(Sphere&) const;
   bool operator<(Sphere&) const;
 
-  virtual void print(std::ostream& where) const;
+  virtual void print(std::ostream& where) const override;
 
   friend std::ostream& operator<<(std::ostream& os, Sphere& s);
 

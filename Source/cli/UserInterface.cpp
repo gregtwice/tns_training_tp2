@@ -6,6 +6,11 @@
 #include <fstream>
 #include <filesystem>
 #include <regex>
+#include <sstream>
+#include <chrono>
+#include <ctime>
+#include <string>
+
 
 #include "Position.hpp"
 #include "Point.hpp"
@@ -57,15 +62,36 @@ void UserInterface::handleSavingToFile() {
   saveFileHandle.close();
 }
 
+template <typename TP>
+std::time_t to_time_t(TP tp) {
+  using namespace std::chrono;
+  auto sctp = time_point_cast<system_clock::duration>(tp - TP::clock::now() + system_clock::now());
+  return system_clock::to_time_t(sctp);
+}
+
 void UserInterface::handleLoadingFromSaveFile() {
   namespace fs = std::filesystem;
   fs::path p = fs::current_path();
 
   // List the current directory for save files.
+
+  
+  std::stringstream ss;
+
   for (fs::directory_entry entry : fs::directory_iterator(p)) {
     if (entry.path().extension() == ".psf") {
-      std::cout << entry.path().filename().string() + "\n";
+      std::wstringstream wss;
+      auto wd = to_time_t(entry.last_write_time());
+      std::tm tm = *std::localtime(&wd);
+      ss << "\t" + entry.path().filename().string() << " Last modified: ";
+      ss << std::put_time(&tm, "%F %T") << "\n";
     }
+  }
+  if (ss.str().empty()) {
+    std::cout << "No Save files were found in the current directory\n";
+  }else {
+    std::cout << "The following save files were found in the current directory:\n";
+    std::cout << ss.str();
   }
 
   std::string saveFileName = utils::Validator::validateASCIIString("Please input the name of the file you want to load\n>>>");
