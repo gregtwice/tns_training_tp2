@@ -1,5 +1,5 @@
-#ifndef SRC_UTILS_INCLUDE_VALIDATOR
-#define SRC_UTILS_INCLUDE_VALIDATOR
+#ifndef SRC_INCLUDE_UTILS_VALIDATOR
+#define SRC_INCLUDE_UTILS_VALIDATOR
 
 #include <string>
 
@@ -15,4 +15,4 @@ public:
 
 }  // namespace utils
 
-#endif /* SRC_UTILS_INCLUDE_VALIDATOR */
+#endif /* SRC_INCLUDE_UTILS_VALIDATOR */

@@ -1,5 +1,5 @@
-#ifndef MYCOLLECTIONS_ITERATOR_H
-#define MYCOLLECTIONS_ITERATOR_H
+#ifndef SRC_INCLUDE_MYCOLLECTIONS_ITERATOR
+#define SRC_INCLUDE_MYCOLLECTIONS_ITERATOR
 
 template <class T>
 class Iterator {
@@ -73,4 +73,4 @@ private:
   pointer _end;
 };
 
-#endif  // MYCOLLECTIONS_ITERATOR_H
+#endif /* SRC_INCLUDE_MYCOLLECTIONS_ITERATOR */

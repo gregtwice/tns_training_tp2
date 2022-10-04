@@ -1,5 +1,5 @@
-#ifndef SRC_CLI_INCLUDE_USERINTERFACE
-#define SRC_CLI_INCLUDE_USERINTERFACE
+#ifndef SRC_INCLUDE_CLI_USERINTERFACE
+#define SRC_INCLUDE_CLI_USERINTERFACE
 
 #include "MyStaticVector.hpp"
 #include "Point.hpp"
@@ -66,4 +66,4 @@ private:
 
 }  // namespace cli
 
-#endif /* SRC_CLI_INCLUDE_USERINTERFACE */
+#endif /* SRC_INCLUDE_CLI_USERINTERFACE */

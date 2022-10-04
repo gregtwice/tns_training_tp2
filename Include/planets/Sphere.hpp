@@ -1,5 +1,5 @@
-#ifndef planets_SPHERE_HPP
-#define planets_SPHERE_HPP
+#ifndef SRC_INCLUDE_PLANETS_SPHERE
+#define SRC_INCLUDE_PLANETS_SPHERE
 
 #include <string>
 
@@ -88,4 +88,4 @@ private:
 
 }  // namespace planets
 
-#endif  // planets_SPHERE_HPP
+#endif /* SRC_INCLUDE_PLANETS_SPHERE */
