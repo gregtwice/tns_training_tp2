@@ -61,7 +61,7 @@ private:
    * @return the string input by the user
    */
   std::string readLine() const;
-  UserInterfaceState state = UserInterfaceState::MENU;
+  UserInterfaceState _state = UserInterfaceState::MENU;
 };
 
 }  // namespace cli

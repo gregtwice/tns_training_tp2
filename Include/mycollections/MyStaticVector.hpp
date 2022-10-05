@@ -24,7 +24,7 @@ public:
    * @return T the copied element
    */
   value_type operator[](unsigned int i) const {
-    return data[i];
+    return _data[i];
   }
   /**
    * @brief Operator returning a reference to the indexed element
@@ -33,7 +33,7 @@ public:
    * @return T& the reference to the indexed element
    */
   reference operator[](unsigned int i) {
-    return data[i];
+    return _data[i];
   }
 
   /**
@@ -44,7 +44,7 @@ public:
    * @return false the vectors are different
    */
   bool operator==(StaticVector& that) {
-    if (that.getSize() != size) return false;
+    if (that.getSize() != _size) return false;
     for (auto ithis = begin(), ithat = that.begin(); ithis != end(); ithis++, ithat++) {
       if (*ithis != *ithat) return false;
     }
@@ -56,7 +56,7 @@ public:
    *
    */
   void clear() {
-    size = 0;
+    _size = 0;
   }
 
   /**
@@ -69,7 +69,7 @@ public:
    */
   template <std::size_t S>
   bool contains(StaticVector<T, S>& that) {
-    if (size < that.getSize()) {
+    if (_size < that.getSize()) {
       return false;
     }
 
@@ -97,9 +97,9 @@ public:
    * @return false if the vector was full
    */
   bool push(value_type v) {
-    if (size >= cap) return false;
-    data[size] = v;
-    size++;
+    if (_size >= cap) return false;
+    _data[_size] = v;
+    _size++;
     return true;
   }
 
@@ -109,13 +109,13 @@ public:
    * @return std::optional<value_type> if the vector is empty, return none
    */
   std::optional<value_type> pop() {
-    if (size == 0) return std::nullopt;
-    value_type v = data[size];
-    size--;
+    if (_size == 0) return std::nullopt;
+    value_type v = _data[_size];
+    _size--;
     return v;
   }
 
-  unsigned int getSize() { return size; }
+  unsigned int getSize() { return _size; }
 
   constexpr unsigned int getCap() { return cap; }
 
@@ -129,12 +129,12 @@ public:
   }
 
 private:
-  unsigned int size = 0;
-  constexpr static const unsigned int cap = N;
-  T data[N];
+  unsigned int _size = 0;
+  constexpr static unsigned int cap = N;
+  T _data[N];
 
-  iterator begin() { return iterator(data); }
-  iterator end() { return iterator(data + size); }
+  iterator begin() { return iterator(_data); }
+  iterator end() { return iterator(_data + _size); }
 };
 
 }  // namespace mycollections

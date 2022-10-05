@@ -62,6 +62,9 @@ void UserInterface::handleSavingToFile() {
   saveFileHandle.close();
 }
 
+/**
+ * @brief Function to convert a date to a time_t that can the be formated
+*/
 template <typename TP>
 std::time_t to_time_t(TP tp) {
   using namespace std::chrono;
@@ -71,14 +74,14 @@ std::time_t to_time_t(TP tp) {
 
 void UserInterface::handleLoadingFromSaveFile() {
   namespace fs = std::filesystem;
-  fs::path p = fs::current_path();
+  fs::path workingDir = fs::current_path();
 
   // List the current directory for save files.
 
   
   std::stringstream ss;
 
-  for (fs::directory_entry entry : fs::directory_iterator(p)) {
+  for (fs::directory_entry entry : fs::directory_iterator(workingDir)) {
     if (entry.path().extension() == ".psf") {
       std::wstringstream wss;
       auto wd = to_time_t(entry.last_write_time());
@@ -102,16 +105,16 @@ void UserInterface::handleLoadingFromSaveFile() {
   std::regex pointRx(planets::Point::savePattern);
   std::regex sphereRx(planets::Sphere::savePattern);
   std::regex astreRx(planets::Astre::savePattern);
-  std::smatch m;
+  std::smatch smatch;
 
   while (std::getline(infile, line)) {
     std::cout << line;
-    if (std::regex_match(line, m, pointRx)) {
+    if (std::regex_match(line, smatch, pointRx)) {
       std::cout << "Point ??\n";
       objects.push(std::make_shared<planets::Point>(line));
-    } else if (std::regex_match(line, m, sphereRx)) {
+    } else if (std::regex_match(line, smatch, sphereRx)) {
       objects.push(std::make_shared<planets::Sphere>(line));
-    } else if (std::regex_match(line, m, astreRx)) {
+    } else if (std::regex_match(line, smatch, astreRx)) {
       objects.push(std::make_shared<planets::Astre>(line));
     }
   }
@@ -126,15 +129,15 @@ void UserInterface::handleInput() {
     std::cerr << e.what() << '\n';
   }
 
-  switch (state) {
+  switch (_state) {
     case UserInterfaceState::MENU:
       switch (userChoice) {
         case 1: {
-          auto itp = objects.iter();
-          printIterator(itp);
+          auto pointIterator = objects.iter();
+          printIterator(pointIterator);
         } break;
         case 2:
-          state = UserInterfaceState::CREATING;
+          _state = UserInterfaceState::CREATING;
           break;
         case 3:
           handleSavingToFile();
@@ -171,7 +174,7 @@ void UserInterface::handleInput() {
           break;
         }
         case 4:
-          state = UserInterfaceState::MENU;
+          _state = UserInterfaceState::MENU;
           break;
         default:
           break;
@@ -201,7 +204,7 @@ void UserInterface::printMainMenu() {
 }
 
 void UserInterface::printMenu() {
-  switch (state) {
+  switch (_state) {
     case UserInterfaceState::MENU:
       printMainMenu();
       break;
