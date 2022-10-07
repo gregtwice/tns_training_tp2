@@ -2,6 +2,7 @@
 #define SRC_INCLUDE_CLI_USERINTERFACE
 
 #include "MyStaticVector.hpp"
+#include "Observer.hpp"
 #include "Point.hpp"
 
 #include <memory>
@@ -9,20 +10,27 @@
 
 namespace cli {
 
-class UserInterface {
+class UserInterface : public cli::Observer {
 public:
   static UserInterface& getInstance() {
     static UserInterface instance;
     return instance;
   }
+
   /**
    * @brief Prints the munu of the user interface
    */
   void printMenu();
+
   /**
    * @brief Prints the menu and asks for user input, loops indefinitely
    */
   void loop();
+
+  /**
+   * @brief Prints a message from a planet
+   */
+  void update(const std::string&) override;
 
 private:
   enum class UserInterfaceState {
@@ -55,6 +63,16 @@ private:
    * @brief Handles the user's input and acts accordingly by modifying the application's state
    */
   void handleInput();
+
+  /**
+   * @brief Runs the solar system in a separate thread for 50000 iterations
+   */
+  void runSolarSystem();
+
+  /**
+   * @brief Create a Small Solar System hardcoded in the application
+   */
+  void createSmallSolarSystem();
 
   /**
    * @brief Asks for user input and returns it

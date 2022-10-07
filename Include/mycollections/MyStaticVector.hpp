@@ -1,5 +1,5 @@
-#ifndef MYCOLLECTIONS_STATICVECTOR_H
-#define MYCOLLECTIONS_STATICVECTOR_H
+#ifndef INCLUDE_MYCOLLECTIONS_MYSTATICVECTOR
+#define INCLUDE_MYCOLLECTIONS_MYSTATICVECTOR
 
 #include <cstddef>
 #include <iostream>
@@ -75,7 +75,6 @@ public:
 
     Iterator<T> thisI = this->iter();
 
-    bool contains = false;
     while (thisI.hasNext()) {
       Iterator<T> thatI = that.iter();
       while (thatI.hasNext()) {
@@ -89,6 +88,7 @@ public:
     }
     return false;
   }
+
   /**
    * @brief Adds a value to the vector and increases the size
    *
@@ -101,6 +101,17 @@ public:
     _data[_size] = v;
     _size++;
     return true;
+  }
+
+  void remove(value_type v) {
+    for (int i = 0; i < getSize(); i++) {
+      if (_data[i] == v) {
+        for (int j = i + 1; j < getSize(); j++) {
+          _data[j - 1] = _data[j];
+        }
+        break;
+      }
+    }
   }
 
   /**
@@ -139,4 +150,4 @@ private:
 
 }  // namespace mycollections
 
-#endif  // MYCOLLECTIONS_STATICVECTOR_H
+#endif /* INCLUDE_MYCOLLECTIONS_MYSTATICVECTOR */

@@ -1,5 +1,5 @@
-#ifndef planets_POINT_HPP
-#define planets_POINT_HPP
+#ifndef INCLUDE_PLANETS_POINT
+#define INCLUDE_PLANETS_POINT
 
 #include <iostream>
 #include <string>
@@ -74,4 +74,4 @@ private:
 
 }  // namespace planets
 
-#endif  // planets_POINT_HPP
+#endif /* INCLUDE_PLANETS_POINT */
