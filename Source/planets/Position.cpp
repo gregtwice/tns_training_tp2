@@ -3,6 +3,7 @@
 
 #include <regex>
 #include <string>
+#include <iomanip>
 
 namespace planets {
 
@@ -26,8 +27,18 @@ Position Position::positionFromUserInput() {
   throw "Not a valid position";
 }
 
-std::ostream& operator<<(std::ostream& os, const Position p) {
-  os << "Position : [" << p._x << "; " << p._y << "; " << p._z << "]";
+Vec3 operator-(Position lhs, Position rhs) {
+  return Vec3(lhs._x - rhs._x, lhs._y - rhs._y, lhs._z - rhs._z);
+}
+
+Position operator+(Position lhs, Vec3 rhs) {
+  return Position(lhs._x + rhs._x, lhs._y + rhs._y, lhs._z + rhs._z);
+}
+
+std::ostream&
+operator<<(std::ostream& os, const Position p) {
+  os.precision(4);
+  os << "Position : [" << std::setw(10) << p._x << "; " << std::setw(10) << p._y << "; " << std::setw(10) << p._z << "]";
   return os;
 }
 

@@ -60,15 +60,16 @@ Astre::~Astre() = default;
 
 double Astre::getMass() const { return getVolume() * _density; }
 
+void Astre::setMass(double mass) { _density = mass / getVolume(); }
+
 double Astre::getDensity() const { return _density; }
 
 /**
 {F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}
 */
 double Astre::getAttraction(Astre& b) const {
-  const double G = 6.67430e-11;
   const double d = getDistance_center(b);
-  return (G * getMass() * b.getMass()) / (d * d);
+  return (gravitationnalConstant * getMass() * b.getMass()) / (d * d);
 }
 
 bool Astre::operator==(const Sphere& rhs) { return rhs == *this; }

@@ -117,6 +117,23 @@ public:
     "density: ([+-]?[0-9]*[.]?[0-9]+)"
     "\\}";
 
+  /**
+   * Our universe's gravitationnal constant
+   */
+  static constexpr double gravitationnalConstant = 6.67430e-11;
+
+  /**
+   * A made up constant for a simpler model
+   */
+  static constexpr double gravitationnalConstantModel = 0.0001;
+
+  /**
+   * @brief Set the Mass 
+   * 
+   * @param mass 
+   */
+  void setMass(double mass);
+
 private:
   double _density;
   void printInit() override;

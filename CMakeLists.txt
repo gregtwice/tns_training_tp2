@@ -7,7 +7,7 @@ project(${EXECUTABLE_NAME} VERSION 0.1.0)
 
 add_executable(${EXECUTABLE_NAME} main.cpp)
 target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_17)
-
+# target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 #Libraries
 
 set(LIBS "planets" "mycollections" "cli" "utils")

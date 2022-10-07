@@ -18,7 +18,7 @@ public:
    * @return T the copied element
    */
   T operator[](unsigned int i) const {
-    return data[i];
+    return _data[i];
   }
 
   /**
@@ -28,7 +28,7 @@ public:
    * @return T& the reference to the indexed element
    */
   T& operator[](unsigned int i) {
-    return data[i];
+    return _data[i];
   }
 
   /**
@@ -56,12 +56,13 @@ public:
     return Iterator<T>(this->begin(), this->end());
   }
 
-  T data[N];
+  
 
 private:
+  T _data[N];
   static const unsigned int size = N;
-  iterator begin() { return iterator(data); }
-  iterator end() { return iterator(data + size); }
+  iterator begin() { return iterator(_data); }
+  iterator end() { return iterator(_data + size); }
 };
 }  // namespace mycollections
 

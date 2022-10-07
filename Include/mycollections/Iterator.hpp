@@ -1,6 +1,8 @@
 #ifndef SRC_INCLUDE_MYCOLLECTIONS_ITERATOR
 #define SRC_INCLUDE_MYCOLLECTIONS_ITERATOR
 
+namespace mycollections {
+
 template <class T>
 class Iterator {
 public:
@@ -73,4 +75,5 @@ private:
   pointer _end;
 };
 
+}  // namespace mycollections
 #endif /* SRC_INCLUDE_MYCOLLECTIONS_ITERATOR */
