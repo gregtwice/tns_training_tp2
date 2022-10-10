@@ -29,7 +29,7 @@ public:
     return ret;
   };
 
-  bool hasNext() {
+  bool hasNext() const {
     return _end != _current;
   };
 
@@ -61,7 +61,7 @@ public:
    *
    * @return reference
    */
-  reference operator*() {
+  reference operator*() const {
     return *_current;
   }
 
