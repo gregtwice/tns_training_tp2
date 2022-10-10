@@ -26,6 +26,12 @@ private:
   bool revolutionComplete = true;
 
 public:
+  /**
+   * @brief Construct a new Planet object from an astre and a velocity
+   * 
+   * @param a an Astre
+   * @param velocity 
+   */
   Planet(Astre& a, Vec3 velocity) : Astre(a), _velocity(velocity){};
   Planet(Planet& other) : Astre(other), _velocity(other._velocity) {}
 

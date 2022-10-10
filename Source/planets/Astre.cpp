@@ -65,8 +65,8 @@ void Astre::setMass(double mass) { _density = mass / getVolume(); }
 double Astre::getDensity() const { return _density; }
 
 /**
-{F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}
-*/
+ * @f[{F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}]
+ */
 double Astre::getAttraction(Astre& b) const {
   const double d = getDistance_center(b);
   return (gravitationnalConstant * getMass() * b.getMass()) / (d * d);
