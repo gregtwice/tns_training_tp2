@@ -16,7 +16,7 @@ public:
    * @param first the first element of the container
    * @param end the pointer of the end of the container
    */
-  Iterator(pointer first, pointer end) : _current(first), _end(end){};
+  Iterator(pointer first, pointer end) : _first(first), _current(first), _end(end){};
 
   /**
    * @brief Increases the pointer of the iterator by one and returns the current value
@@ -47,6 +47,15 @@ public:
     return c;
   }
 
+  template <typename Functor>
+  Iterator& forEach(Functor f) {
+    while (hasNext()) {
+      f(next());
+    }
+    _current = _first;
+    return *this;
+  }
+
   /**
    * @brief Returns the value currenty pointed by the iterator
    *
@@ -71,8 +80,9 @@ public:
   }
 
 private:
+  const pointer _first;
   pointer _current;
-  pointer _end;
+  const pointer _end;
 };
 
 }  // namespace mycollections
