@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <ostream>
 #include <string>
 #include <fstream>
 #include <filesystem>
@@ -40,10 +41,7 @@ std::string UserInterface::readLine() const {
 
 template <class T>
 static void printIterator(T iter) {
-  while (iter.hasNext()) {
-    auto val = iter.next();
-    std::cout << *val << std::endl;
-  }
+  iter.forEach([](auto v) { std::cout << *v << "\n"; });
 }
 
 void UserInterface::handleSavingToFile() {
@@ -56,23 +54,18 @@ void UserInterface::handleSavingToFile() {
 
   std::ofstream saveFileHandle(saveFilePath);
 
-  auto iter = objects.iter();
-  while (iter.hasNext()) {
-    auto obj = iter.next();
-    saveFileHandle << *obj << "\n";
-  }
+  objects.iter().forEach([&](auto obj) { saveFileHandle << *obj << "\n"; });
+
   saveFileHandle.close();
 }
 
 void runSystem(mycollections::StaticVector<planets::Planet*, 20> bodies) {
   using namespace std::chrono_literals;
   for (int i = 0; i < 50000; i++) {
-    for (size_t j = 0; j < bodies.getSize(); j++) {
-      bodies[j]->updateVelocity(bodies.iter(), 1);
-    }
-    for (size_t j = 0; j < bodies.getSize(); j++) {
-      bodies[j]->updatePosition(1);
-    }
+    bodies
+      .iter()
+      .forEach([&](planets::Planet* body) { body->updateVelocity(bodies.iter(), 1); })
+      .forEach([&](planets::Planet* body) { body->updatePosition(1); });
     std::this_thread::sleep_for(1ms);
   }
   std::cout << "Ended simulation\n";
@@ -299,18 +292,20 @@ void UserInterface::createSmallSolarSystem() {
   objects.push(std::make_shared<Planet>(pggs1));
   objects.push(std::make_shared<Planet>(far_away));
 
-  auto it = objects.iter();
-  while (it.hasNext()) {
-    std::shared_ptr<Planet> p;
-    p = std::dynamic_pointer_cast<Planet>(it.next());
-    p->registerObserver(this);
-  }
-  // it = objects.iter();
-  // while (it.hasNext()) {
-  //   std::shared_ptr<Planet> p;
-  //   p = std::dynamic_pointer_cast<Planet>(it.next());
-  //   p->notifyObservers();
-  // }
+  // auto it = objects.iter();
+
+  objects
+    .iter()
+    .forEach([this](std::shared_ptr<Point> x) {
+      std::shared_ptr<Planet> p;
+      p = std::dynamic_pointer_cast<Planet>(x);
+      p->registerObserver(this);
+    })
+    .forEach([](std::shared_ptr<Point> x) {
+      std::shared_ptr<Planet> p;
+      p = std::dynamic_pointer_cast<Planet>(x);
+      p->notifyObservers();
+    });
 }
 
 void UserInterface::runSolarSystem() {
