@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <cstdlib>
 #include <iostream>
 #include <ostream>
 #include <fstream>
@@ -30,7 +32,7 @@ void testPlanets() {
 
   // Point earth_p = Point("Earth", Position(149.57e9, 0, 0));
   Point earth_p = Point("Earth", Position(0, 0, 0));
-  Sphere earth_s(earth_p, 6371e3 * 2);
+  Sphere earth_s(std::move(earth_p), 6371e3 * 2);
   Astre earth_a = Astre(earth_s, 5.972e24 / earth_s.getVolume());
   Planet earth(earth_a, Vec3(0, 0, 0));
   // earth.setVelocityRelativeToOrbitDistance(sun, 0);
@@ -38,7 +40,7 @@ void testPlanets() {
   println("-------------------------------------------------------------");
   println("MOON");
   Point moon_p = Point("Moon", Position(earth.getPosition()._x + 384400e3, 0, 0));
-  Sphere moon_s(moon_p, 1737e3 * 2);
+  Sphere moon_s(std::move(moon_p), 1737e3 * 2);
   Astre moon_a = Astre(moon_s, 7.342e22 / moon_s.getVolume());
   Planet moon(moon_a, Vec3(0, 0, 0));
   moon.setVelocityRelativeToOrbitDistance(earth);
@@ -50,7 +52,7 @@ void testPlanets() {
   double sat_dist = 6e3;
 
   Point sat_p("Satelite", Position(moon.getPosition()._x + moon.getDiameter() / 2 + sat_dist, 0, 0));
-  Sphere sat_s(sat_p, 10);
+  Sphere sat_s(std::move(sat_p), 10);
   Astre sat_a(sat_s, 10);
   Planet sat(sat_a, Vec3(0, 0, 0));
 
@@ -92,9 +94,9 @@ void testPlanets() {
 }
 
 int main(int, char**) {
-  // createSolarSystem();
-  auto cli = cli::UserInterface::getInstance();
-  cli.loop();
+  createSolarSystem();
+  // auto cli = cli::UserInterface::getInstance();
+  // cli.loop();
 }
 
 void createSolarSystem() {
@@ -102,13 +104,13 @@ void createSolarSystem() {
   println("-------------------------------------------------------------");
   println("SUN");
   Point sun_p = Point("Sun", Position(0, 0, 0));
-  Sphere sun_s(sun_p, 1500 * 2);
+  Sphere sun_s(std::move(sun_p), 1500 * 2);
   Astre sun_a = Astre(sun_s, (50 * sun_s.getDiameter() / 2 * sun_s.getDiameter() / 2 / Astre::gravitationnalConstantModel) / sun_s.getVolume());
   Planet sun(sun_a, Vec3(0, 0, 0));
   println("-------------------------------------------------------------");
   println("EARTHs");
   Point earth_p = Point("Earth", Position(-11033.0, 0.0, 0.0));
-  Sphere earth_s(earth_p, 300 * 2);
+  Sphere earth_s(std::move(earth_p), 300 * 2);
   Astre earth_a = Astre(earth_s, earth_s.getVolume());
   earth_a.setMass((10 * earth_s.getDiameter() / 2 * earth_s.getDiameter() / 2 / Astre::gravitationnalConstantModel));
   Planet earth1(earth_a, Vec3(0, 102.57, 0));
@@ -121,7 +123,7 @@ void createSolarSystem() {
   println("-------------------------------------------------------------");
   println("Far away");
   Point far_away_p = Point("far_away", Position(-24295, 0, 0));
-  Sphere far_away_s(far_away_p, 400);
+  Sphere far_away_s(std::move(far_away_p), 400);
   Astre far_away_a = Astre(far_away_s, 7.342e22 / far_away_s.getVolume());
   far_away_a.setMass((8 * far_away_a.getDiameter() / 2 * far_away_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
   Planet far_away(far_away_a, Vec3(0, 70.23, 0));
@@ -130,7 +132,7 @@ void createSolarSystem() {
   println("Far away sat");
 
   Point sat_p("Green Satelite", Position(-23549, 0, 0));
-  Sphere sat_s(sat_p, 50 * 2);
+  Sphere sat_s(std::move(sat_p), 50 * 2);
   Astre sat_a(sat_s, 0);
   sat_a.setMass((3 * sat_a.getDiameter() / 2 * sat_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
   Planet sat(sat_a, Vec3(0, 51, 0));
@@ -140,20 +142,26 @@ void createSolarSystem() {
 
   Point pgg_p("Purple gas giant", Position(-58811, 0, 0));  //49811
 
-  Sphere pgg_s(pgg_p, 500 * 2);
+  Sphere pgg_s(std::move(pgg_p), 500 * 2);
   Astre pgg_a(pgg_s, 0);
   pgg_a.setMass((14 * pgg_a.getDiameter() / 2 * pgg_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
   Planet pgg(pgg_a, Vec3(0, 50.3, 0));
 
-  Point pggs1_p("Purple gas giant sat1", Position(-55700, 0, 0));
-  Sphere pggs1_s(pggs1_p, 40 * 2);
-  Astre pggs1_a(pggs1_s, 0);
+  println("-------------------------------------------------------------");
+  println("Puple gas giant's satellite");
+
+  Astre pggs1_a(
+    Sphere(
+      Point("Purple gas giant sat1",
+        Position(-55700, 0, 0)),
+      40 * 2),
+    0);
   pggs1_a.setMass((2 * pggs1_a.getDiameter() / 2 * pggs1_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet pggs1(pggs1_a, Vec3(0, 18.3, 0));
+  Planet pggs1(std::move(pggs1_a), Vec3(0, 18.3, 0));
 
   FILE* pFile = fopen("/mnt/c/Users/g.defoy/Desktop/dump.txt", "w");
   double simu_step = 1;
-
+  exit(EXIT_SUCCESS);
   auto bodies = mycollections::StaticVector<Planet*, 20>();
   bodies.push(&earth1);
   bodies.push(&earth2);

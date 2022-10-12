@@ -9,6 +9,16 @@
 
 namespace planets {
 
+void Planet::printInit() {
+  auto pos = getPosition();
+  double x = pos._x;
+  double y = pos._y;
+  double z = pos._z;
+  std::cout << "Created an Planet of mass " << getMass() << ", and diameter "
+            << getDiameter() << ", at (" << x << ", " << y << ", " << z << ")"
+            << std::endl;
+}
+
 void Planet::updateVelocity(Planet& other, double timestep) {
   double squaredDistance = (other.getPosition() - getPosition()).sqrmag();
   Vec3 forceDir = (other.getPosition() - getPosition()).normalize();
@@ -42,7 +52,6 @@ void Planet::updatePosition(double timestep) {
   if (_previousPos._x > getPosition()._x && nextPos._x > getPosition()._x) {
     if (getDiameter() > 150 && getDiameter() < 2000) {
       notifyObservers();
-      //std::cout << _previousPos << getPosition() << nextPos << "\n";
     }
   }
   _previousPos = getPosition();
@@ -59,7 +68,7 @@ void Planet::notifyObservers() {
   auto it = observers.iter();
   while (it.hasNext()) {
     auto obs = it.next();
-    obs->update("The planet " + this->getName() + " completed a trip around the sun !!");
+    obs->update("The planet " + getName() + " completed a trip around the sun !!");
   }
 }
 

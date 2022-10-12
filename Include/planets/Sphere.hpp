@@ -14,13 +14,22 @@ public:
    * @param p a Point which holds the sphere's coordinates
    * @param diameter the diameter of the sphere
    */
+  Sphere(Point&& p, double diameter);
+
+  /**
+   * @brief Construct a new Sphere object
+   * @param p a Point which holds the sphere's coordinates
+   * @param diameter the diameter of the sphere
+   */
   Sphere(Point& p, double diameter);
 
   /**
    * @brief Construct a new Sphere object
    * Copies the sphere object
    */
-  Sphere(Sphere&);
+  Sphere(const Sphere&);
+
+  Sphere(Sphere&& rhs);
 
   Sphere(const std::string& str);
 

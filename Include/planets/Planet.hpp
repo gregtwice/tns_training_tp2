@@ -13,18 +13,6 @@
 namespace planets {
 
 class Planet : public Astre, public cli::Subject {
-private:
-  /**
-   * @brief the curent velocity of the planet moving in the simulated universe
-   */
-  Vec3 _velocity;
-  /**
-   * @brief Previous position of the planet used to calculate if a revolution around the sun has been made
-   */
-  Position _previousPos;
-  mycollections::StaticVector<cli::Observer*, 3> observers;
-  bool revolutionComplete = true;
-
 public:
   /**
    * @brief Construct a new Planet object from an astre and a velocity
@@ -33,6 +21,20 @@ public:
    * @param velocity 
    */
   Planet(Astre& a, Vec3 velocity) : Astre(a), _velocity(velocity){};
+
+  /**
+   * @brief Construct a new Planet object with the move contructor of Astre
+   * 
+   * @param a the astre to be moved
+   * @param velocity the velocity of the planet
+   */
+  Planet(Astre&& a, Vec3 velocity) : Astre(std::move(a)), _velocity(velocity) { Planet::printInit(); };
+
+  /**
+   * @brief Construct a new Planet object by copying the astre object
+   * 
+   * @param other the astre to copy
+   */
   Planet(Planet& other) : Astre(other), _velocity(other._velocity) {}
 
   /**
@@ -86,6 +88,20 @@ public:
 
   Vec3 getVelocity() { return _velocity; }
   void setVelocity(Vec3 v) { _velocity = v; }
+
+private:
+  /**
+   * @brief the curent velocity of the planet moving in the simulated universe
+   */
+  Vec3 _velocity;
+  /**
+   * @brief Previous position of the planet used to calculate if a revolution around the sun has been made
+   */
+  Position _previousPos;
+  mycollections::StaticVector<cli::Observer*, 3> observers;
+  bool revolutionComplete = true;
+
+  void printInit() override;
 };
 }  // namespace planets
 

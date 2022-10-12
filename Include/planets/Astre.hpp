@@ -1,6 +1,7 @@
 #ifndef planets_ASTRE_HPP
 #define planets_ASTRE_HPP
 
+#include <algorithm>
 #include <string_view>
 #include <vector>
 #include <memory>
@@ -16,7 +17,22 @@ public:
    * @param sphere a sphere upon which the Astre will be based
    * @param density the Astre's density
    */
-  Astre(Sphere& sphere, double density);
+  Astre(const Sphere& sphere, double density);
+
+  /**
+   * @brief Construct a new Astre object
+   *
+   * @param sphere a sphere upon which the Astre will be based
+   * @param density the Astre's density
+   */
+  Astre(Sphere&& sphere, double density);
+
+  /**
+   * @brief Construct a new Astre object
+   * 
+   * @param rhs 
+   */
+  Astre(Astre&& rhs);
 
   /**
    * @brief Construct a new Astre object
@@ -136,7 +152,7 @@ public:
 
 private:
   double _density;
-  void printInit() override;
+  virtual void printInit() override;
 };
 
 }  // namespace planets

@@ -1,5 +1,6 @@
 #include "Astre.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <regex>
@@ -20,14 +21,18 @@ void Astre::printInit() {
             << std::endl;
 }
 
-Astre::Astre(Sphere& s, double density) : Sphere(s), _density(density) {
+Astre::Astre(const Sphere& s, double density) : Sphere(s), _density(density) {
   Astre::printInit();
 }
 
+Astre::Astre(Sphere&& sphere, double density) : Sphere(std::move(sphere)), _density(density) {}
+
 Astre::Astre(Point& point, double diameter, double density)
-    : Sphere(point, diameter), _density(density) {
+    : Sphere(std::move(point), diameter), _density(density) {
   Astre::printInit();
 }
+
+Astre::Astre(Astre&& rhs) : Sphere(std::move(rhs)), _density(rhs._density){};
 
 Astre::Astre(Astre& other) : Sphere(other), _density(other._density) {}
 

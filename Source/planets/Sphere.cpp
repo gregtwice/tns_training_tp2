@@ -1,5 +1,6 @@
 #include "Sphere.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <string>
 #include <regex>
@@ -11,16 +12,19 @@
 namespace planets {
 
 void Sphere::printInit() {
-  std::cout << "Created a new Sphere" << *this
+  std::cout << "Created a new Sphere " << *this
             << " of volume : " << getVolume() << "\n";
 }
 
-Sphere::Sphere(Point& p, double diameter)
-    : Point(p.getName(), p.getPosition()), _diameter(diameter) {
+Sphere::Sphere(Point& p, double diameter) : Point(p), _diameter(diameter) {
   Sphere::printInit();
 }
 
-Sphere::Sphere(Sphere& s)
+Sphere::Sphere(Point&& p, double diameter) : Point(std::move(p)), _diameter(diameter) {}
+
+Sphere::Sphere(Sphere&& rhs) : Point(std::move(rhs)), _diameter(rhs._diameter) {}
+
+Sphere::Sphere(const Sphere& s)
     : Point(s.getName(), s.getPosition()), _diameter(s.getDiameter()) {
   Sphere::printInit();
 }
@@ -42,7 +46,7 @@ Sphere Sphere::sphereFromUserInput() {
   const double diameter = utils::Validator::validateDouble("What is the diameter of the object?\n>>> ",
     "Invalid Input! Please input a numerical value.");
 
-  return Sphere(p, diameter);
+  return Sphere(std::move(p), diameter);
 }
 
 Sphere::~Sphere() = default;
