@@ -36,7 +36,7 @@ void UserInterface::printCreatingMenu() {
 std::string UserInterface::readLine() const {
   std::string userInput;
   std::cout << ">>> ";
-  std::getline(std::cin, userInput);
+  std::cin >> userInput;
   return userInput;
 }
 
@@ -68,7 +68,7 @@ void runSystem(mycollections::StaticVector<planets::Planet*, 20> bodies) {
       .iter()
       .forEach([&](planets::Planet* body) { body->updateVelocity(bodies.iter(), 1); })
       .forEach([&](planets::Planet* body) { body->updatePosition(1); });
-    std::this_thread::sleep_for(1ms);
+    // std::this_thread::sleep_for(1ms);
   }
   std::cout << "Ended simulation\n";
 }
@@ -242,58 +242,74 @@ void UserInterface::update(const std::string& message) {
 void UserInterface::createSmallSolarSystem() {
   using namespace planets;
 
-  Point sun_p = Point("Sun", Position(0, 0, 0));
-  Sphere sun_s(std::move(sun_p), 1500 * 2);
-  Astre sun_a = Astre(sun_s, (50 * sun_s.getDiameter() / 2 * sun_s.getDiameter() / 2 / Astre::gravitationnalConstantModel) / sun_s.getVolume());
-  Planet sun(sun_a, Vec3(0, 0, 0));
+  auto sun_radius = 1500.0;
+  auto sun_position = Position(0, 0, 0);
+  auto sun_surface_gravity = 50;
+  auto sun_mass = (sun_surface_gravity * sun_radius * sun_radius / Astre::gravitationnalConstantModel);
 
-  Point earth_p = Point("Earth", Position(-11033.0, 0.0, 0.0));
-  Sphere earth_s(std::move(earth_p), 300 * 2);
-  Astre earth_a = Astre(earth_s, earth_s.getVolume());
-  earth_a.setMass((10 * earth_s.getDiameter() / 2 * earth_s.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet earth1(earth_a, Vec3(0, 102.57, 0));
-  Planet earth2(earth_a, Vec3(0, 102.57, 0));
+  Planet sun(Astre(Sphere(Point("Sun", sun_position), sun_radius * 2), sun_surface_gravity), Vec3(0, 0, 0));
+  sun.setMass(sun_mass);
 
-  earth2.setPosition(Position(-13038, 0, 0));
-  earth2.setVelocity(Vec3(0, 80.6, 0));
-  earth1.setVelocity(Vec3(0, 115.3, 0));
-  earth1.setName("Earth 1");
-  earth2.setName("Earth 2");
+  /**********************************************************************************************/
 
-  Point far_away_p = Point("far_away", Position(-24295, 0, 0));
-  Sphere far_away_s(std::move(far_away_p), 400);
-  Astre far_away_a = Astre(far_away_s, 7.342e22 / far_away_s.getVolume());
-  far_away_a.setMass((8 * far_away_a.getDiameter() / 2 * far_away_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet far_away(far_away_a, Vec3(0, 70.23, 0));
+  auto earth1_position = Position(-11033, 0, 0);
+  auto earth2_position = Position(-13038, 0, 0);
+  auto earth1_speed = Vec3(0, 115.3, 0);
+  auto earth2_speed = Vec3(0, 80.6, 0);
 
-  Point sat_p("Green Satelite", Position(-23549, 0, 0));
-  Sphere sat_s(std::move(sat_p), 50 * 2);
-  Astre sat_a(sat_s, 0);
-  sat_a.setMass((3 * sat_a.getDiameter() / 2 * sat_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet sat(sat_a, Vec3(0, 51, 0));
+  auto earth_radius = 300;
+  auto earth_surface_gravity = 10;
+  auto earth_speed = Vec3(0, 102.57, 0);
+  auto earth_mass = (earth_surface_gravity * earth_radius * earth_radius / Astre::gravitationnalConstantModel);
 
-  Point pgg_p("Purple gas giant", Position(-58811, 0, 0));  //49811
+  Planet earth1(Astre(Sphere(Point("Earth 1", earth1_position), earth_radius * 2), 0), earth1_speed);
+  Planet earth2(Astre(Sphere(Point("Earth 2", earth2_position), earth_radius * 2), 0), earth2_speed);
+  earth1.setMass(earth_mass);
+  earth2.setMass(earth_mass);
 
-  Sphere pgg_s(std::move(pgg_p), 500 * 2);
-  Astre pgg_a(Sphere(std::move(pgg_p), 500 * 2), 0);
-  pgg_a.setMass((14 * pgg_a.getDiameter() / 2 * pgg_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet pgg(pgg_a, Vec3(0, 50.3, 0));
+  /**********************************************************************************************/
 
-  Point pggs1_p("Purple gas giant sat1", Position(-55700, 0, 0));
-  Sphere pggs1_s(std::move(pggs1_p), 40 * 2);
-  Astre pggs1_a(pggs1_s, 0);
-  pggs1_a.setMass((2 * pggs1_a.getDiameter() / 2 * pggs1_a.getDiameter() / 2 / Astre::gravitationnalConstantModel));
-  Planet pggs1(pggs1_a, Vec3(0, 18.3, 0));
+  auto gp_position = Position(-24295, 0, 0);
+  auto gp_radius = 200;
+  auto gp_surface_gravity = 8;
+  auto gp_mass = (gp_surface_gravity * gp_radius * gp_radius / Astre::gravitationnalConstantModel);
 
-  objects.push(std::make_shared<Planet>(earth1));
-  objects.push(std::make_shared<Planet>(earth2));
-  objects.push(std::make_shared<Planet>(sun));
-  objects.push(std::make_shared<Planet>(sat));
-  objects.push(std::make_shared<Planet>(pgg));
-  objects.push(std::make_shared<Planet>(pggs1));
-  objects.push(std::make_shared<Planet>(far_away));
+  Planet green_planet(Astre(Sphere(Point("Green Planet", gp_position), gp_radius * 2), gp_surface_gravity), Vec3(0, 70.23, 0));
+  green_planet.setMass(gp_mass);
 
-  // auto it = objects.iter();
+  /**********************************************************************************************/
+
+  auto gp_sat_position = Position(-23549, 0, 0);
+  auto gp_sat_radius = 50;
+  auto gp_sat_surface_gravity = 3;
+  auto gp_sat_mass = gp_sat_surface_gravity * gp_sat_radius * gp_sat_radius / Astre::gravitationnalConstantModel;
+
+  Planet gp_sat(Astre(Sphere(Point("Green Planet Satelite", gp_sat_position), gp_sat_radius * 2), 0), Vec3(0, 51, 0));
+  gp_sat.setMass(gp_sat_mass);
+
+  auto pgg_position = Position(-58811, 0, 0);
+  auto pgg_radius = 500;
+  auto pgg_surface_gravity = 14;
+  auto pgg_mass = pgg_surface_gravity * pgg_radius * pgg_radius / Astre::gravitationnalConstantModel;
+
+  Planet pgg(Astre(Sphere(Point("Purple gas giant", pgg_position), pgg_radius * 2), 0), Vec3(0, 50.3, 0));
+  pgg.setMass(pgg_mass);
+  /**********************************************************************************************/
+  auto pgg_sat_radius = 40;
+  auto pgg_sat_position = Position(-55700, 0, 0);
+  auto pgg_sat_surface_gravity = 2;
+  auto pgg_sat_mass = (pgg_sat_surface_gravity * pgg_sat_radius * pgg_sat_radius / Astre::gravitationnalConstantModel);
+
+  Planet pgg_sat(Astre(Sphere(Point("Purple gas giant sat1", pgg_sat_position), pgg_sat_radius * 2), 0), Vec3(0, 18.3, 0));
+  pgg_sat.setMass(pgg_mass);
+
+  objects.push(std::make_shared<Planet>(std::move(earth1)));
+  objects.push(std::make_shared<Planet>(std::move(earth2)));
+  objects.push(std::make_shared<Planet>(std::move(sun)));
+  objects.push(std::make_shared<Planet>(std::move(gp_sat)));
+  objects.push(std::make_shared<Planet>(std::move(pgg)));
+  objects.push(std::make_shared<Planet>(std::move(pgg_sat)));
+  objects.push(std::make_shared<Planet>(std::move(green_planet)));
 
   objects
     .iter()
@@ -307,9 +323,6 @@ void UserInterface::createSmallSolarSystem() {
       p = std::dynamic_pointer_cast<Planet>(x);
       p->notifyObservers();
     });
-}
-
-void UserInterface::runSolarSystem() {
 }
 
 }  // namespace cli

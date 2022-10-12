@@ -37,6 +37,8 @@ public:
    */
   Planet(Planet& other) : Astre(other), _velocity(other._velocity) {}
 
+  Planet(Planet&& rhs) = default;
+
   /**
    * @brief Set the Velocity Relative To Orbit Distance of the given plannet  
    * 
