@@ -1,5 +1,5 @@
-#ifndef SRC_INCLUDE_CLI_USERINTERFACE
-#define SRC_INCLUDE_CLI_USERINTERFACE
+#ifndef INCLUDE_CLI_USERINTERFACE
+#define INCLUDE_CLI_USERINTERFACE
 
 #include "MyStaticVector.hpp"
 #include "Observer.hpp"
@@ -12,6 +12,11 @@ namespace cli {
 
 class UserInterface : public cli::Observer {
 public:
+  /**
+   * @brief Get the Singleton of the UserInterface
+   * 
+   * @return UserInterface& 
+   */
   static UserInterface& getInstance() {
     static UserInterface instance;
     return instance;
@@ -70,11 +75,6 @@ private:
   void runSolarSystem();
 
   /**
-   * @brief Create a Small Solar System hardcoded in the application
-   */
-  void createSmallSolarSystem();
-
-  /**
    * @brief Asks for user input and returns it
    * @return the string input by the user
    */
@@ -84,4 +84,4 @@ private:
 
 }  // namespace cli
 
-#endif /* SRC_INCLUDE_CLI_USERINTERFACE */
+#endif /* INCLUDE_CLI_USERINTERFACE */
