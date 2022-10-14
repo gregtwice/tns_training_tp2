@@ -23,7 +23,7 @@ public:
    * @param i the index
    * @return T the copied element
    */
-  value_type operator[](unsigned int i) const {
+  value_type operator[](const unsigned int i) const {
     return _data[i];
   }
   /**
@@ -32,7 +32,7 @@ public:
    * @param i the index
    * @return T& the reference to the indexed element
    */
-  reference operator[](unsigned int i) {
+  reference operator[](const unsigned int i) {
     return _data[i];
   }
 
@@ -43,7 +43,7 @@ public:
    * @return true  the vectors are the same
    * @return false the vectors are different
    */
-  bool operator==(StaticVector& that) const {
+  bool operator==(const StaticVector& that) const {
     if (that.getSize() != _size) return false;
     for (auto ithis = begin(), ithat = that.begin(); ithis != end(); ithis++, ithat++) {
       if (*ithis != *ithat) return false;
@@ -68,7 +68,7 @@ public:
    * @return false 'that' is not contained in the vector
    */
   template <std::size_t S>
-  bool contains(StaticVector<T, S>& that) const {
+  bool contains(const StaticVector<T, S>& that) const {
     if (_size < that.getSize()) {
       return false;
     }
@@ -122,7 +122,7 @@ public:
    * 
    * @param v the value to remove
    */
-  void remove(value_type v) {
+  void remove(const value_type v) {
     for (int i = 0; i < getSize(); i++) {
       if (_data[i] == v) {
         for (int j = i + 1; j < getSize(); j++) {

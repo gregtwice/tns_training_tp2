@@ -65,7 +65,7 @@ public:
    * @return Iterator& the iterator that has been reset to allow to chain calls to Iterator methods
    */
   template <typename Functor>
-  Iterator& forEach(Functor f) {
+  Iterator& forEach(const Functor f) {
     while (hasNext()) {
       f(next());
     }
@@ -79,7 +79,7 @@ public:
    * @param n the number of elements to skip
    * @return Iterator& 
    */
-  Iterator& skip(unsigned int n) {
+  Iterator& skip(const unsigned int n) {
     for (unsigned int i = 0; i < n && hasNext(); i++) {
       next();
       _index--;
@@ -93,7 +93,7 @@ public:
    * @param n the number of elements to get
    * @return Iterator& 
    */
-  Iterator& take(unsigned int n) {
+  Iterator& take(const unsigned int n) {
     _max = n;
     return *this;
   }

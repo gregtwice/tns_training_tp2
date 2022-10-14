@@ -6,7 +6,7 @@
 
 namespace utils {
 
-double Validator::validateDouble(std::string question, std::string errorMessage) {
+double Validator::validateDouble(const std::string question, const std::string errorMessage) {
   double x;
   while (1) {
     std::cout << question;
@@ -36,8 +36,8 @@ bool containsSpaces(const std::string& str) {
   });
 }
 
-std::string Validator::validateASCIIString(std::string question,
-  std::string errorMessage) {
+std::string Validator::validateASCIIString(const std::string question,
+  const std::string errorMessage) {
   std::string userInput;
 
   while (1) {

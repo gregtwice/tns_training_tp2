@@ -6,10 +6,10 @@
 
 namespace planets {
 
-Vec3 operator*(const Vec3& lhs, double scalar) { return Vec3(lhs._x * scalar, lhs._y * scalar, lhs._z * scalar); }
-Vec3 operator+(const Vec3& lhs, double scalar) { return Vec3(lhs._x + scalar, lhs._y + scalar, lhs._z + scalar); }
-Vec3 operator/(const Vec3& lhs, double scalar) { return Vec3(lhs._x / scalar, lhs._y / scalar, lhs._z / scalar); }
-Vec3 operator-(const Vec3& lhs, double scalar) { return Vec3(lhs._x - scalar, lhs._y - scalar, lhs._z - scalar); }
+Vec3 operator*(const Vec3& lhs, const double scalar) { return Vec3(lhs._x * scalar, lhs._y * scalar, lhs._z * scalar); }
+Vec3 operator+(const Vec3& lhs, const double scalar) { return Vec3(lhs._x + scalar, lhs._y + scalar, lhs._z + scalar); }
+Vec3 operator/(const Vec3& lhs, const double scalar) { return Vec3(lhs._x / scalar, lhs._y / scalar, lhs._z / scalar); }
+Vec3 operator-(const Vec3& lhs, const double scalar) { return Vec3(lhs._x - scalar, lhs._y - scalar, lhs._z - scalar); }
 
 Vec3 operator-(const Vec3& lhs, const Vec3& rhs) {
   return Vec3(lhs._x - rhs._x, lhs._y - rhs._y, lhs._z - rhs._z);

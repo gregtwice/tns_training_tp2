@@ -21,11 +21,11 @@ void Astre::printInit() const {
             << std::endl;
 }
 
-Astre::Astre(const Sphere& s, double density) : Sphere(s), _density(density) {
+Astre::Astre(const Sphere& s, const double density) : Sphere(s), _density(density) {
   Astre::printInit();
 }
 
-Astre::Astre(Sphere&& sphere, double density) : Sphere(std::move(sphere)), _density(density) {}
+Astre::Astre(Sphere&& sphere, const double density) : Sphere(std::move(sphere)), _density(density) {}
 
 Astre::Astre(Point& point, double diameter, double density)
     : Sphere(std::move(point), diameter), _density(density) {
@@ -34,7 +34,7 @@ Astre::Astre(Point& point, double diameter, double density)
 
 Astre::Astre(Astre&& rhs) : Sphere(std::move(rhs)), _density(rhs._density){};
 
-Astre::Astre(Astre& other) : Sphere(other), _density(other._density) {}
+Astre::Astre(const Astre& other) : Sphere(other), _density(other._density) {}
 
 Astre::Astre(const std::string& str) {
   std::regex astreRx(savePattern);
@@ -65,14 +65,14 @@ Astre::~Astre() = default;
 
 double Astre::getMass() const { return getVolume() * _density; }
 
-void Astre::setMass(double mass) { _density = mass / getVolume(); }
+void Astre::setMass(const double mass) { _density = mass / getVolume(); }
 
 double Astre::getDensity() const { return _density; }
 
 /**
  * @f[{F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}]
  */
-double Astre::getAttraction(Astre& b) const {
+double Astre::getAttraction(const Astre& b) const {
   const double d = getDistance_center(b);
   return (gravitationnalConstant * getMass() * b.getMass()) / (d * d);
 }

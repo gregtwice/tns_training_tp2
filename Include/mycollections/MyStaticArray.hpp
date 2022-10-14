@@ -17,7 +17,7 @@ public:
    * @param i the index
    * @return T the copied element
    */
-  T operator[](unsigned int i) const {
+  T operator[](const unsigned int i) const {
     return _data[i];
   }
 
@@ -27,7 +27,7 @@ public:
    * @param i the index
    * @return T& the reference to the indexed element
    */
-  T& operator[](unsigned int i) {
+  T& operator[](const unsigned int i) {
     return _data[i];
   }
 
@@ -38,7 +38,7 @@ public:
    * @return true  the vectors are the same
    * @return false the vectors are different
    */
-  bool operator==(StaticArray& that) {
+  bool operator==(const StaticArray& that) {
     for (auto ithis = begin(), ithat = that.begin(); ithis != end(); ithis++, ithat++) {
       if (*ithis != *ithat) return false;
     }

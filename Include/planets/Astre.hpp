@@ -18,7 +18,7 @@ public:
    * @param sphere a sphere upon which the Astre will be based
    * @param density the Astre's density
    */
-  Astre(const Sphere& sphere, double density);
+  Astre(const Sphere& sphere, const double density);
 
   /**
    * @brief Construct a new Astre object
@@ -26,7 +26,7 @@ public:
    * @param sphere a sphere upon which the Astre will be based
    * @param density the Astre's density
    */
-  Astre(Sphere&& sphere, double density);
+  Astre(Sphere&& sphere, const double density);
 
   /**
    * @brief Construct a new Astre object
@@ -42,13 +42,13 @@ public:
    * @param diameter the diameter of the Astre
    * @param density  the density of the Astre
    */
-  Astre(Point& point, double diameter, double density);
+  Astre(Point& point, const double diameter, const double density);
 
   /**
    * @brief Constructs a Astre object by copying the properties of the other Astre object
    * @param other the object to copy
    */
-  Astre(Astre& other);
+  Astre(const Astre& other);
 
   /**
    * \brief Creates a new Astre object by parsing the string representing the serialized object
@@ -84,7 +84,7 @@ public:
    *
    * @return double the computed gravitation force in Newtons
    */
-  double getAttraction(Astre&) const;
+  double getAttraction(const Astre&) const;
 
   /**
    * @brief Computes the sum of the gravitation forces of all the astres in
@@ -149,7 +149,7 @@ public:
    * 
    * @param mass 
    */
-  void setMass(double mass);
+  void setMass(const double mass);
 
 private:
   double _density;

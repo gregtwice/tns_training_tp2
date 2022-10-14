@@ -14,11 +14,10 @@ public:
    * @param errorMessage 
    * @return double 
    */
-  static double validateDouble(std::string question,
-    std::string errorMessage);
+  static double validateDouble(const std::string question, const std::string errorMessage);
 
-  static std::string validateASCIIString(std::string question,
-    std::string errorMessage = "Invalid Input !; Expected an ASCII string without spaces");
+  static std::string validateASCIIString(const std::string question,
+    const std::string errorMessage = "Invalid Input !; Expected an ASCII string without spaces");
 };
 
 }  // namespace utils

@@ -21,7 +21,7 @@ public:
    * @param p a Point which holds the sphere's coordinates
    * @param diameter the diameter of the sphere
    */
-  Sphere(Point& p, double diameter);
+  Sphere(const Point& p, double diameter);
 
   /**
    * @brief Construct a new Sphere object
@@ -58,7 +58,7 @@ public:
    * @param Point the point to get the distance from
    * @return the computed distance
    */
-  double getDistance_center(Point&) const;
+  double getDistance_center(const Point&) const;
 
   /**
    * @brief Computes the distance between a Sphere and a Sphere
@@ -69,7 +69,7 @@ public:
    *
    * @return the computed distance
    */
-  double getDistance(Sphere&) const;
+  double getDistance(const Sphere&) const;
 
   ~Sphere();
 

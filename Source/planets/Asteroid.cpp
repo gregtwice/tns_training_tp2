@@ -11,12 +11,12 @@
 
 namespace planets {
 
-Asteroid::Asteroid(Planet&& rhs, Vec3 vel) : Planet(std::move(rhs)) {
+Asteroid::Asteroid(Planet&& rhs, const Vec3 vel) : Planet(std::move(rhs)) {
   setVelocity(vel);
 }
 Asteroid::Asteroid(Planet&& rhs) : Planet(std::move(rhs)){};
 
-Asteroid Asteroid::withRandomCoordinates(int id) {
+Asteroid Asteroid::withRandomCoordinates(const int id) {
   std::random_device rd;
   std::uniform_real_distribution<double> distVel(-100, 100);
   std::uniform_real_distribution<double> distPos(-50000, 50000);

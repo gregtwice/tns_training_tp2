@@ -16,7 +16,7 @@ void Sphere::printInit() const {
             << " of volume : " << getVolume() << "\n";
 }
 
-Sphere::Sphere(Point& p, double diameter) : Point(p), _diameter(diameter) {
+Sphere::Sphere(const Point& p, double diameter) : Point(p), _diameter(diameter) {
   Sphere::printInit();
 }
 
@@ -55,11 +55,11 @@ double Sphere::getVolume() const {
   return 4 * M_PI * pow(_diameter / 2, 3) / 3;
 }
 
-double Sphere::getDistance_center(Point& rhs) const {
+double Sphere::getDistance_center(const Point& rhs) const {
   return Point::getDistance(rhs);
 }
 
-double Sphere::getDistance(Sphere& s) const {
+double Sphere::getDistance(const Sphere& s) const {
   const double rawDist = Point::getDistance(s);
   return rawDist - (s._diameter + _diameter) / 2;
 }

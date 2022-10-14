@@ -20,7 +20,7 @@ public:
    * @param id the number to add at the end of the name of the asteroid
    * @return Asteroid 
    */
-  static Asteroid withRandomCoordinates(int id);
+  static Asteroid withRandomCoordinates(const int id);
 
   /**
    * @brief Checks for collisions with the given planets

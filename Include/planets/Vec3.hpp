@@ -42,10 +42,10 @@ public:
    */
   Vec3 normalize();
 
-  friend Vec3 operator*(const Vec3& lhs, double scalar);
-  friend Vec3 operator+(const Vec3& lhs, double scalar);
-  friend Vec3 operator/(const Vec3& lhs, double scalar);
-  friend Vec3 operator-(const Vec3& lhs, double scalar);
+  friend Vec3 operator*(const Vec3& lhs, const double scalar);
+  friend Vec3 operator+(const Vec3& lhs, const double scalar);
+  friend Vec3 operator/(const Vec3& lhs, const double scalar);
+  friend Vec3 operator-(const Vec3& lhs, const double scalar);
 
   friend Vec3 operator-(const Vec3& lhs, const Vec3& rhs);
 
