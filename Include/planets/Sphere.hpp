@@ -29,8 +29,18 @@ public:
    */
   Sphere(const Sphere&);
 
+  /**
+   * @brief Construct a new Sphere object with a moved sphere object
+   * 
+   * @param rhs the moved sphere
+   */
   Sphere(Sphere&& rhs);
 
+  /**
+   * @brief Construct a new Sphere object from a string
+   * 
+   * @param str 
+   */
   Sphere(const std::string& str);
 
   static Sphere sphereFromUserInput();

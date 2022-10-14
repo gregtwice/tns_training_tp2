@@ -37,6 +37,11 @@ public:
    */
   Planet(Planet& other) : Astre(other), _velocity(other._velocity) {}
 
+  /**
+   * @brief Construct a new Planet object with a moved planet
+   * 
+   * @param rhs the moved planet
+   */
   Planet(Planet&& rhs) = default;
 
   /**
@@ -91,6 +96,27 @@ public:
   Vec3 getVelocity() { return _velocity; }
   void setVelocity(Vec3 v) { _velocity = v; }
 
+  /**
+   * @brief Checks whether two bodies collide into each other 
+   * 
+   * @param rhs the body to check against
+   * @return whether two bodies collide into each other 
+   */
+  bool doesItCollide(Planet& rhs);
+
+  /**
+   * @brief Checks for collisions with the given planets
+   * 
+   * @param it the collection's iterator to check for collisions 
+   */
+  virtual void checkCollisions(mycollections::Iterator<Planet*> it);
+
+  bool hasCrashed() { return _crashed; }
+
+protected:
+  mycollections::StaticVector<cli::Observer*, 3> observers;
+  bool _crashed = false;
+
 private:
   /**
    * @brief the curent velocity of the planet moving in the simulated universe
@@ -100,7 +126,6 @@ private:
    * @brief Previous position of the planet used to calculate if a revolution around the sun has been made
    */
   Position _previousPos;
-  mycollections::StaticVector<cli::Observer*, 3> observers;
   bool revolutionComplete = true;
 
   void printInit() override;

@@ -5,6 +5,8 @@ add_library(${MODULE_NAME}
     "${CMAKE_CURRENT_SOURCE_DIR}/Position.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/Sphere.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/Astre.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Asteroid.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/SolarSystem.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/Planet.cpp"
 )
 

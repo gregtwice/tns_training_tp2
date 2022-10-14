@@ -30,6 +30,9 @@ public:
     return ret;
   };
 
+  /**
+   * @brief returns wether the Iterator can still call the next() method
+   */
   bool hasNext() const {
     return _end != _current && _index < _max;
   };
@@ -70,6 +73,12 @@ public:
     return reset();
   }
 
+  /**
+   * @brief Skips the n firsts elements of the iterator
+   * 
+   * @param n the number of elements to skip
+   * @return Iterator& 
+   */
   Iterator& skip(unsigned int n) {
     for (unsigned int i = 0; i < n && hasNext(); i++) {
       next();
@@ -78,6 +87,12 @@ public:
     return *this;
   }
 
+  /**
+   * @brief Limits the number of elements in the iterator
+   * 
+   * @param n the number of elements to get
+   * @return Iterator& 
+   */
   Iterator& take(unsigned int n) {
     _max = n;
     return *this;

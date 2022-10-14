@@ -1,5 +1,6 @@
 #include "Planet.hpp"
 
+#include "Observer.hpp"
 #include "Position.hpp"
 #include "Vec3.hpp"
 #include "Iterator.hpp"
@@ -69,6 +70,19 @@ void Planet::notifyObservers() {
   while (it.hasNext()) {
     auto obs = it.next();
     obs->update("The planet " + getName() + " completed a trip around the sun !!");
+  }
+}
+
+bool Planet::doesItCollide(Planet& rhs) {
+  return getDistance_center(rhs) < (getDiameter() + rhs.getDiameter());
+}
+
+void Planet::checkCollisions(mycollections::Iterator<Planet*> it) {
+  while (it.hasNext()) {
+    auto planet = it.next();
+    if (this != planet && doesItCollide(*planet)) {
+      observers.iter().forEach([this, &planet](cli::Observer* obs) { obs->update("The planet " + getName() + "has collided with the Asteroid [" + planet->getName() + "]"); });
+    }
   }
 }
 

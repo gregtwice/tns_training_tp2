@@ -103,12 +103,32 @@ public:
     return true;
   }
 
+  /**
+   * @brief Adds a moved value to the vector and increases the size
+   *
+   * @param v the moved value to append
+   * @return true if the value was successfully inserted
+   * @return false if the vector was full
+   */
+  bool push_m(T&& v) {
+    if (_size >= cap) return false;
+    _data[_size] = v;
+    _size++;
+    return true;
+  }
+
+  /**
+   * @brief Removes an element of the vector by value
+   * 
+   * @param v the value to remove
+   */
   void remove(value_type v) {
     for (int i = 0; i < getSize(); i++) {
       if (_data[i] == v) {
         for (int j = i + 1; j < getSize(); j++) {
           _data[j - 1] = _data[j];
         }
+        _size -= 1;
         break;
       }
     }

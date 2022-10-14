@@ -6,6 +6,14 @@
 namespace utils {
 class Validator {
 public:
+  /**
+   * @brief Validates a double from user input
+   * the function prints the question, then gets input from the 
+   * 
+   * @param question 
+   * @param errorMessage 
+   * @return double 
+   */
   static double validateDouble(std::string question,
     std::string errorMessage);
 
