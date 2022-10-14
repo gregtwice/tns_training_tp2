@@ -69,7 +69,7 @@ private:
   std::string _name;
   Position _position;
 
-  virtual void printInit();
+  virtual void printInit() const;
 };
 
 }  // namespace planets

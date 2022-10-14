@@ -43,7 +43,7 @@ public:
    * @return true  the vectors are the same
    * @return false the vectors are different
    */
-  bool operator==(StaticVector& that) {
+  bool operator==(StaticVector& that) const {
     if (that.getSize() != _size) return false;
     for (auto ithis = begin(), ithat = that.begin(); ithis != end(); ithis++, ithat++) {
       if (*ithis != *ithat) return false;
@@ -68,7 +68,7 @@ public:
    * @return false 'that' is not contained in the vector
    */
   template <std::size_t S>
-  bool contains(StaticVector<T, S>& that) {
+  bool contains(StaticVector<T, S>& that) const {
     if (_size < that.getSize()) {
       return false;
     }
@@ -146,16 +146,16 @@ public:
     return v;
   }
 
-  unsigned int getSize() { return _size; }
+  unsigned int getSize() const { return _size; }
 
-  constexpr unsigned int getCap() { return cap; }
+  constexpr unsigned int getCap() const { return cap; }
 
   /**
    * @brief Creates an iterator object of the class
    *
    * @return Iterator<T>
    */
-  Iterator<T> iter() {
+  Iterator<T> iter() const {
     return Iterator<T>(this->begin(), this->end());
   }
 
@@ -164,8 +164,8 @@ private:
   constexpr static unsigned int cap = N;
   T _data[N];
 
-  iterator begin() { return iterator(_data); }
-  iterator end() { return iterator(_data + _size); }
+  iterator begin() const { return iterator(_data); }
+  iterator end() const { return iterator(_data + _size); }
 };
 
 }  // namespace mycollections

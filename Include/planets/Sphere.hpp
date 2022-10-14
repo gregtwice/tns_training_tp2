@@ -102,7 +102,7 @@ protected:
 
 private:
   double _diameter;
-  void printInit() override;
+  void printInit() const override;
 };
 
 }  // namespace planets

@@ -25,7 +25,7 @@ public:
   /**
    * @brief Prints the munu of the user interface
    */
-  void printMenu();
+  void printMenu() const;
 
   /**
    * @brief Prints the menu and asks for user input, loops indefinitely
@@ -58,21 +58,16 @@ private:
   /**
    * @brief prints the menu to create an object
    */
-  static void printCreatingMenu();
+  void printCreatingMenu() const;
   /**
    * @brief prints the main menu of the application
    */
-  void printMainMenu();
+  void printMainMenu() const;
 
   /**
    * @brief Handles the user's input and acts accordingly by modifying the application's state
    */
   void handleInput();
-
-  /**
-   * @brief Runs the solar system in a separate thread for 50000 iterations
-   */
-  void runSolarSystem();
 
   /**
    * @brief Asks for user input and returns it

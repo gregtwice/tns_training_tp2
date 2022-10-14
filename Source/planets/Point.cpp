@@ -9,7 +9,7 @@
 
 namespace planets {
 
-void Point::printInit() {
+void Point::printInit() const {
   double x = _position._x;
   double y = _position._y;
   double z = _position._z;

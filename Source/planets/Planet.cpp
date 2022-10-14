@@ -10,7 +10,7 @@
 
 namespace planets {
 
-void Planet::printInit() {
+void Planet::printInit() const {
   auto pos = getPosition();
   double x = pos._x;
   double y = pos._y;

@@ -11,7 +11,7 @@
 
 namespace planets {
 
-void Sphere::printInit() {
+void Sphere::printInit() const {
   std::cout << "Created a new Sphere " << *this
             << " of volume : " << getVolume() << "\n";
 }

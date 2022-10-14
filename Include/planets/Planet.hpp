@@ -128,7 +128,7 @@ private:
   Position _previousPos;
   bool revolutionComplete = true;
 
-  void printInit() override;
+  void printInit() const override;
 };
 }  // namespace planets
 

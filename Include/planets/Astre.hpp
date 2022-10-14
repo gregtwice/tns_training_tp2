@@ -153,7 +153,7 @@ public:
 
 private:
   double _density;
-  virtual void printInit() override;
+  virtual void printInit() const override;
 };
 
 }  // namespace planets

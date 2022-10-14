@@ -45,24 +45,22 @@ public:
     return true;
   }
 
-  unsigned int getSize() { return size; }
+  unsigned int getSize() const { return size; }
 
   /**
    * @brief Creates an iterator object of the class
    *
    * @return Iterator<T>
    */
-  Iterator<T> iter() {
+  Iterator<T> iter() const {
     return Iterator<T>(this->begin(), this->end());
   }
-
-  
 
 private:
   T _data[N];
   static const unsigned int size = N;
-  iterator begin() { return iterator(_data); }
-  iterator end() { return iterator(_data + size); }
+  iterator begin() const { return iterator(_data); }
+  iterator end() const { return iterator(_data + size); }
 };
 }  // namespace mycollections
 

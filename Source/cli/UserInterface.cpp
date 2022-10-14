@@ -29,7 +29,7 @@
 
 namespace cli {
 
-void UserInterface::printCreatingMenu() {
+void UserInterface::printCreatingMenu() const {
   std::cout << "\n======Object Creation======\n\t"
             << "1) Point \n\t"
             << "2) Sphere\n\t"
@@ -205,7 +205,7 @@ void UserInterface::loop() {
   }
 }
 
-void UserInterface::printMainMenu() {
+void UserInterface::printMainMenu() const {
   std::cout << "\n======Planet Calculator=====" << std::endl;
   std::cout << "Select an action :\n\t"
             << "1) List all objects\n\t"
@@ -216,7 +216,7 @@ void UserInterface::printMainMenu() {
             << "6) Lanch solar system in a thread\n";
 }
 
-void UserInterface::printMenu() {
+void UserInterface::printMenu() const {
   switch (_state) {
     case UserInterfaceState::MENU:
       printMainMenu();
