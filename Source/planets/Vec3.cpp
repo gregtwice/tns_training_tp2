@@ -20,6 +20,10 @@ void Vec3::operator+=(const Vec3& rhs) {
   _z += rhs._z;
 }
 
+bool operator==(const Vec3& lhs, const Vec3& rhs) {
+  return lhs._x == rhs._x && lhs._y == rhs._y && lhs._z == rhs._z;
+}
+
 double Vec3::mag() {
   return sqrt(sqrmag());
 }
@@ -30,7 +34,13 @@ double Vec3::sqrmag() {
 
 Vec3 Vec3::normalize() {
   double magnitude = mag();
-  return Vec3(_x / magnitude, _y / magnitude, _z / magnitude);
+  Vec3 ret;
+  if (magnitude == 0) {
+    ret = Vec3(0, 0, 0);
+  } else {
+    ret = Vec3(_x / magnitude, _y / magnitude, _z / magnitude);
+  }
+  return ret;
 }
 
 std::ostream&

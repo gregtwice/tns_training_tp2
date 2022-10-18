@@ -55,6 +55,7 @@ public:
   double _y;
   double _z;
   void operator+=(const Vec3& rhs);
+  friend bool operator==(const Vec3& lhs, const Vec3& rhs);
 
   ~Vec3() = default;
 };
