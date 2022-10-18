@@ -14,6 +14,7 @@ namespace planets {
 Asteroid::Asteroid(Planet&& rhs, const Vec3 vel) : Planet(std::move(rhs)) {
   setVelocity(vel);
 }
+
 Asteroid::Asteroid(Planet&& rhs) : Planet(std::move(rhs)){};
 
 Asteroid Asteroid::withRandomCoordinates(const int id) {
@@ -31,7 +32,9 @@ void Asteroid::checkCollisions(mycollections::Iterator<Planet*> it) {
   while (it.hasNext()) {
     auto planet = it.next();
     if (this != planet && doesItCollide(*planet)) {
-      observers.iter().forEach([this, &planet](cli::Observer* obs) { obs->update("The planet " + getName() + "has collided with the Asteroid [" + planet->getName() + "]"); });
+      observers.iter().forEach([this, &planet](cli::Observer* obs) {
+        obs->update("The planet " + getName() + "has collided with the Asteroid [" + planet->getName() + "]");
+      });
       _crashed = true;
     }
   }
