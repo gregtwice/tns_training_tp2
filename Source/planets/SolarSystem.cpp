@@ -30,13 +30,12 @@ void SolarSystem::createPlanet(PlanetParams params) {
 SolarSystem::SolarSystem() {
   // Sun of the system
   {
-    PlanetParams sun_params = {
-      .name = "S",
-      .position = Position(0, 0, 0),
-      .radius = 1500,
-      .surface_gravity = 50,
-      .velocity = Vec3(0, 0, 0),
-    };
+    PlanetParams sun_params;
+    sun_params.name = "S";
+    sun_params.position = Position(0, 0, 0);
+    sun_params.radius = 1500;
+    sun_params.surface_gravity = 50;
+    sun_params.velocity = Vec3(0, 0, 0);
 
     createPlanet(sun_params);
   }
@@ -44,50 +43,45 @@ SolarSystem::SolarSystem() {
   /**********************************  TWIN EARTHS  *****************************************/
 
   {
-    PlanetParams earth1_params = {
-      .name = "E1",
-      .position = Position(-11033.0, 0, 0),
-      .radius = 300,
-      .surface_gravity = 10,
-      .velocity = Vec3(0, 115.36, 0),
-    };
+    PlanetParams earth1_params;
+    earth1_params.name = "E1";
+    earth1_params.position = Position(-11033.0, 0, 0);
+    earth1_params.radius = 300;
+    earth1_params.surface_gravity = 10;
+    earth1_params.velocity = Vec3(0, 115.36, 0);
 
     createPlanet(earth1_params);
   }
   {
-    PlanetParams earth2_params = {
-      .name = "E2",
-      .position = Position(-13038.0, 0, 0),
-      .radius = 300,
-      .surface_gravity = 10,
-      .velocity = Vec3(0, 80.6, 0),
-    };
-
+    PlanetParams earth2_params;
+    earth2_params.name = "E2";
+    earth2_params.position = Position(-13038.0, 0, 0);
+    earth2_params.radius = 300;
+    earth2_params.surface_gravity = 10;
+    earth2_params.velocity = Vec3(0, 80.6, 0);
     createPlanet(earth2_params);
-  }
+  };
 
   /**********************************************************************************************/
   {
-    PlanetParams gp_params = {
-      .name = "GP",
-      .position = Position(-24295, 0, 0),
-      .radius = 200,
-      .surface_gravity = 8,
-      .velocity = Vec3(0, 70.23, 0),
-    };
+    PlanetParams gp_params;
+    gp_params.name = "GP";
+    gp_params.position = Position(-24295, 0, 0);
+    gp_params.radius = 200;
+    gp_params.surface_gravity = 8;
+    gp_params.velocity = Vec3(0, 70.23, 0);
 
     createPlanet(gp_params);
   }
   /**********************************************************************************************/
 
   {
-    PlanetParams gp_sat_params = {
-      .name = "GPS",
-      .position = Position(-23549.0, 0, 0),
-      .radius = 50,
-      .surface_gravity = 3,
-      .velocity = Vec3(0, 51, 0),
-    };
+    PlanetParams gp_sat_params;
+    gp_sat_params.name = "GPS";
+    gp_sat_params.position = Position(-23549.0, 0, 0);
+    gp_sat_params.radius = 50;
+    gp_sat_params.surface_gravity = 3;
+    gp_sat_params.velocity = Vec3(0, 51, 0);
 
     createPlanet(gp_sat_params);
   }
@@ -95,13 +89,12 @@ SolarSystem::SolarSystem() {
   /**********************************************************************************************/
 
   {
-    PlanetParams pgg_params = {
-      .name = "PGG",
-      .position = Position(-58811.0, 0, 0),
-      .radius = 500,
-      .surface_gravity = 14,
-      .velocity = Vec3(0, 50.3, 0),
-    };
+    PlanetParams pgg_params;
+    pgg_params.name = "PGG";
+    pgg_params.position = Position(-58811.0, 0, 0);
+    pgg_params.radius = 500;
+    pgg_params.surface_gravity = 14;
+    pgg_params.velocity = Vec3(0, 50.3, 0);
 
     createPlanet(pgg_params);
   }
@@ -109,13 +102,12 @@ SolarSystem::SolarSystem() {
   /**********************************************************************************************/
 
   {
-    PlanetParams pgg_sat_params = {
-      .name = "PGG",
-      .position = Position(-55700.0, 0, 0),
-      .radius = 40,
-      .surface_gravity = 2,
-      .velocity = Vec3(0, 18.3, 0),
-    };
+    PlanetParams pgg_sat_params;
+    pgg_sat_params.name = "PGG";
+    pgg_sat_params.position = Position(-55700.0, 0, 0);
+    pgg_sat_params.radius = 40;
+    pgg_sat_params.surface_gravity = 2;
+    pgg_sat_params.velocity = Vec3(0, 18.3, 0);
 
     createPlanet(pgg_sat_params);
   }
@@ -137,7 +129,7 @@ SolarSystem::SolarSystem() {
     .forEach([](auto x) {
       x->registerObserver(&cli::UserInterface::getInstance());
     });
-}
+}  // namespace planets
 
 /**
  * @brief Create a mat file to record the planet positions
