@@ -212,7 +212,7 @@ void SolarSystem::run(const unsigned int steps) {
   auto tm = *std::localtime(&t);
 #if (defined(_WIN32) || defined(_WIN64))
   // windows code
-  std::oss << "Outputed results in this file : ./planet_simu_" << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << ".mat\n";
+  std::cout << "Outputed results in this file : ./planet_simu_" << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << ".mat\n";
 #else
   std::cout << "Outputed results in this file : /tmp/planet_simu_" << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << ".mat\n";
 #endif

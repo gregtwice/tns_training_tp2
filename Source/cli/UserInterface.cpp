@@ -277,8 +277,8 @@ void UserInterface::printMainMenu() const {
             << "2) Create an object\n\t"
             << "3) Save the current objects\n\t"
             << "4) Load a save of a previous context\n\t"
-            << "5) Quit\n\t"
-            << "6) Lanch solar system in a thread\n";
+            << "5) Lanch solar system in a thread\n"
+            << "6) Quit\n\t";
 }
 
 void UserInterface::printMenu() const {
