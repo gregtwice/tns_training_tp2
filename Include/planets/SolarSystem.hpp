@@ -20,7 +20,7 @@ public:
    * 
    * @param steps the number of steps to run the system for
    */
-  void run(const u_int32_t steps);
+  void run(const unsigned int steps);
 
 private:
   mycollections::StaticVector<std::shared_ptr<planets::Planet>, 20> planets;

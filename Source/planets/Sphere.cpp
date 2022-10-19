@@ -5,6 +5,8 @@
 #include <string>
 #include <regex>
 
+#include "compat.hpp"
+
 #include "Point.hpp"
 #include "Position.hpp"
 #include "Validator.hpp"

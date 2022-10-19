@@ -1,5 +1,4 @@
 #include "SolarSystem.hpp"
-#include <bits/types/FILE.h>
 
 #include <cstdio>
 #include <memory>
@@ -113,14 +112,20 @@ FILE* create_mat_file() {
   auto t = std::time(nullptr);
   auto tm = *std::localtime(&t);
   std::ostringstream oss;
+#if (defined(_WIN32) || defined(_WIN64))
+  // windows code
+  oss << "./planet_simu_" << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << ".mat";
+#else 
   oss << "/tmp/planet_simu_" << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << ".mat";
+#endif
+
   std::string filename = oss.str();
 
   FILE* pFile = fopen(filename.c_str(), "w");
   return pFile;
 }
 
-void SolarSystem::run(const u_int32_t steps) {
+void SolarSystem::run(const unsigned int steps) {
   using namespace std::chrono_literals;
 
   mycollections::StaticVector<planets::Planet*, 40> bodies;
