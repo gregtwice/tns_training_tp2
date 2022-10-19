@@ -25,6 +25,15 @@ public:
 private:
   mycollections::StaticVector<std::shared_ptr<planets::Planet>, 20> planets;
   mycollections::StaticVector<std::shared_ptr<planets::Asteroid>, 20> asteroids;
+
+  struct PlanetParams {
+    std::string name;
+    Position position;
+    double radius;
+    double surface_gravity;
+    Vec3 velocity;
+  };
+  void createPlanet(PlanetParams params);
 };
 }  // namespace planets
 

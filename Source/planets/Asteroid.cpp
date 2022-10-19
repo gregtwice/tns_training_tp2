@@ -19,12 +19,15 @@ Asteroid::Asteroid(Planet&& rhs) : Planet(std::move(rhs)){};
 
 Asteroid Asteroid::withRandomCoordinates(const int id) {
   std::random_device rd;
+
+  // asteroids spawn with velocities between -100 and 100
   std::uniform_real_distribution<double> distVel(-100, 100);
+
+  // asteroids spawn with velocities between -50000 and 50000
   std::uniform_real_distribution<double> distPos(-50000, 50000);
 
   auto vel = Vec3(distVel(rd), distVel(rd), distVel(rd));
   auto position = Position(distPos(rd), distPos(rd), distPos(rd));
-  //   return Asteroid(Planet(Astre(Sphere(Point("Asteroid_" + std::to_string(id), position), 10), 0), vel));
   return Asteroid(Planet(Astre(Sphere(Point("A_" + std::to_string(id), position), 0), 0), vel));
 }
 

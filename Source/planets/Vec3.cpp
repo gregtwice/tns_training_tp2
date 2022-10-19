@@ -35,6 +35,7 @@ double Vec3::sqrmag() {
 Vec3 Vec3::normalize() {
   double magnitude = mag();
   Vec3 ret;
+  // handle null vector
   if (magnitude == 0) {
     ret = Vec3(0, 0, 0);
   } else {

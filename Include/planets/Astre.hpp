@@ -1,5 +1,5 @@
-#ifndef planets_ASTRE_HPP
-#define planets_ASTRE_HPP
+#ifndef INCLUDE_PLANETS_ASTRE
+#define INCLUDE_PLANETS_ASTRE
 
 #include <algorithm>
 #include <string_view>
@@ -151,6 +151,11 @@ public:
    */
   void setMass(const double mass);
 
+  void setDensity(const double density);
+
+protected:
+  Astre() = default;
+
 private:
   double _density;
   virtual void printInit() const override;
@@ -158,4 +163,4 @@ private:
 
 }  // namespace planets
 
-#endif  // planets_ASTRE_HPP
+#endif /* INCLUDE_PLANETS_ASTRE */

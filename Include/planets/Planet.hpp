@@ -45,6 +45,12 @@ public:
   Planet(Planet&& rhs) = default;
 
   /**
+   * \brief Creates a new Planet object by parsing the string representing the serialized object
+   * \param str the string to parse
+   */
+  Planet(const std::string& str);
+
+  /**
    * @brief Set the Velocity Relative To Orbit Distance of the given plannet  
    * 
    * @param p the planet to calculate the velocity needed to orbit it
@@ -93,7 +99,7 @@ public:
    */
   void notifyObservers() override;
 
-  Vec3 getVelocity() { return _velocity; }
+  Vec3 getVelocity() const { return _velocity; }
   void setVelocity(Vec3 v) { _velocity = v; }
 
   /**
@@ -112,6 +118,25 @@ public:
   virtual void checkCollisions(mycollections::Iterator<Planet*> it);
 
   bool hasCrashed() { return _crashed; }
+
+  /**
+   * @brief displays the planet on a stream given as parameter
+   * 
+   * @param where the stream to print to
+   */
+  void print(std::ostream& where) const override;
+
+  friend std::ostream& operator<<(std::ostream& os, const Planet& p);
+
+  static constexpr auto savePattern =
+    "Planet:\\{"
+    "name: \"([0-9a-zA-Z ]+)\", "
+    "position: \\[([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+)\\], "
+    "diameter: ([+-]?[0-9]*[.]?[0-9]+), "
+    "density: ([+-]?[0-9]*[.]?[0-9]+),"
+    "velocity: \\[([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+); ([+-]?[0-9]*[.]?[0-9]+)\\],"
+
+    "\\}";
 
 protected:
   mycollections::StaticVector<cli::Observer*, 3> observers;

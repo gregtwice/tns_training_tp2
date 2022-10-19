@@ -45,6 +45,8 @@ private:
 
   mycollections::StaticVector<std::shared_ptr<planets::Point>, 20> objects;
 
+  bool _shouldExit = false;
+
   UserInterface() = default;
   /**
    * @brief Saves the current objects to a file chosen by the user

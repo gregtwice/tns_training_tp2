@@ -50,8 +50,6 @@ Astre::Astre(const std::string& str) {
   _density = std::stod(m[6]);
 };
 
-// Astre::Astre(Astre&& other) : Sphere(other), _density(other._density) {}
-
 Astre Astre::astreFromUserInput() {
   Sphere s = Sphere::sphereFromUserInput();
   std::cout << "What is the density of the object?\n>>>";
@@ -68,6 +66,8 @@ double Astre::getMass() const { return getVolume() * _density; }
 void Astre::setMass(const double mass) { _density = mass / getVolume(); }
 
 double Astre::getDensity() const { return _density; }
+
+void Astre::setDensity(const double density) { _density = density; };
 
 /**
  * @f[{F}_{{A/B}}={F}_{{B/A}}=G{\frac {M_{A}M_{B}}{d^{2}}}]
