@@ -167,16 +167,20 @@ void UserInterface::handleLoadingFromSaveFile() {
   std::regex pointRx(planets::Point::savePattern);
   std::regex sphereRx(planets::Sphere::savePattern);
   std::regex astreRx(planets::Astre::savePattern);
+  std::regex planetRx(planets::Planet::savePattern);
   std::smatch smatch;
 
   while (std::getline(infile, line)) {
-    std::cout << line;
+    std::cout << line << "\n";
     if (std::regex_match(line, smatch, pointRx)) {
       objects.push(std::make_shared<planets::Point>(line));
     } else if (std::regex_match(line, smatch, sphereRx)) {
       objects.push(std::make_shared<planets::Sphere>(line));
     } else if (std::regex_match(line, smatch, astreRx)) {
       objects.push(std::make_shared<planets::Astre>(line));
+    } else if (std::regex_match(line, smatch, planetRx)) {
+      std::cout << "LAAAAA\n";
+      objects.push(std::make_shared<planets::Planet>(line));
     }
   }
 }
@@ -277,8 +281,8 @@ void UserInterface::printMainMenu() const {
             << "2) Create an object\n\t"
             << "3) Save the current objects\n\t"
             << "4) Load a save of a previous context\n\t"
-            << "5) Lanch solar system in a thread\n"
-            << "6) Quit\n\t";
+            << "5) Lanch solar system in a thread\n\t"
+            << "6) Quit\n";
 }
 
 void UserInterface::printMenu() const {

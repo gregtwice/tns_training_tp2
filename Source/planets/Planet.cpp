@@ -134,7 +134,7 @@ void Planet::print(std::ostream& os) const {
      << "\", position: [" << px << "; " << py << "; " << pz << "]"
      << ", diameter: " << getDiameter()
      << ", density: " << getDensity()
-     << ", velocity : [" << vx << "; " << vy << "; " << vz << "]"
+     << ", velocity: [" << vx << "; " << vy << "; " << vz << "]"
      << "}";
 }
 

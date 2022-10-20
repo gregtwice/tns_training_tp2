@@ -1,0 +1,7 @@
+Planet:{name: "S", position: [0; 0; 0], diameter: 3000, density: 79.5775, velocity: [0; 0; 0]}
+Planet:{name: "E1", position: [-11033; 0; 0], diameter: 600, density: 79.5775, velocity: [0; 115.36; 0]}
+Planet:{name: "E2", position: [-13038; 0; 0], diameter: 600, density: 79.5775, velocity: [0; 80.6; 0]}
+Planet:{name: "GP", position: [-24295; 0; 0], diameter: 400, density: 95.493, velocity: [0; 70.23; 0]}
+Planet:{name: "GPS", position: [-23549; 0; 0], diameter: 100, density: 143.239, velocity: [0; 51; 0]}
+Planet:{name: "PGG", position: [-58811; 0; 0], diameter: 1000, density: 66.8451, velocity: [0; 50.3; 0]}
+Planet:{name: "PGG", position: [-55700; 0; 0], diameter: 80, density: 119.366, velocity: [0; 18.3; 0]}
