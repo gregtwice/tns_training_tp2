@@ -40,6 +40,9 @@ std::string Validator::validateASCIIString(const std::string question,
   const std::string errorMessage) {
   std::string userInput;
 
+  std::cin.clear();
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
   while (1) {
     std::cout << question;
     std::getline(std::cin, userInput);
@@ -53,6 +56,7 @@ std::string Validator::validateASCIIString(const std::string question,
       break;
     }
   }
+  std::cout << ">>> {" << userInput << "} <<<\n";
   return userInput;
 }
 
