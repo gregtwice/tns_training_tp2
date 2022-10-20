@@ -179,7 +179,6 @@ void UserInterface::handleLoadingFromSaveFile() {
     } else if (std::regex_match(line, smatch, astreRx)) {
       objects.push(std::make_shared<planets::Astre>(line));
     } else if (std::regex_match(line, smatch, planetRx)) {
-      std::cout << "LAAAAA\n";
       objects.push(std::make_shared<planets::Planet>(line));
     }
   }
@@ -224,9 +223,15 @@ void UserInterface::handleInput() {
 
           // simulate the hardcoded system
         case mmc::MainMenuChoice::SIMULATE: {
-          planets::SolarSystem sol;
-          std::thread solSys(&planets::SolarSystem::run, sol, 50000);
-          solSys.detach();
+          if (objects.getSize() > 0) {
+            planets::SolarSystem sol(objects.iter());
+            std::thread solSys(&planets::SolarSystem::run, sol, 50000);
+            solSys.detach();
+          } else {
+            planets::SolarSystem sol;
+            std::thread solSys(&planets::SolarSystem::run, sol, 50000);
+            solSys.detach();
+          }
         }
         default:
           std::cerr << "not a valid input !!!"

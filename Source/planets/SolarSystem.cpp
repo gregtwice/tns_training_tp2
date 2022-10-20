@@ -131,6 +131,14 @@ SolarSystem::SolarSystem() {
     });
 }  // namespace planets
 
+SolarSystem::SolarSystem(mycollections::Iterator<std::shared_ptr<planets::Point>> iter) {
+  while (iter.hasNext()) {
+    std::shared_ptr<Planet> p;
+    p = std::dynamic_pointer_cast<Planet>(iter.next());
+    this->planets.push(p);
+  }
+}
+
 /**
  * @brief Create a mat file to record the planet positions
  * 

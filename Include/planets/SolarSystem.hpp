@@ -1,6 +1,8 @@
 #ifndef INCLUDE_PLANETS_SOLARSYSTEM
 #define INCLUDE_PLANETS_SOLARSYSTEM
 
+#include <iterator>
+#include <memory>
 #include "Asteroid.hpp"
 #include "MyStaticVector.hpp"
 #include "Planet.hpp"
@@ -13,6 +15,8 @@ public:
    * @brief Construct a new Solar System object with hardcoded parameters
    */
   SolarSystem();
+
+  SolarSystem(mycollections::Iterator<std::shared_ptr<planets::Point>> iter);
   ~SolarSystem() = default;
 
   /**
